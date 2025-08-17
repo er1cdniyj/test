@@ -332,14 +332,14 @@
           <h2 class="section-title">Your Offer</h2>
           <div class="fruit-selector">
             <div class="fruit-input">
-              <label for="your-fruit">Select Fruit</label>
+              <label for="your-fruit">Select Companion</label>
               <select id="your-fruit">
-                <option value="">Select a fruit</option>
-                <!-- Fruits will be added by JavaScript -->
+                <option value="">Select a Companion</option>
+
               </select>
             </div>
             <div class="fruit-input">
-              <label for="your-amount">Amount <span class="tooltip">?<span class="tooltiptext">Number of this fruit you're offering</span></span></label>
+              <label for="your-amount">Amount <span class="tooltip">?<span class="tooltiptext">Number of this Comps you're offering</span></span></label>
               <input type="number" id="your-amount" min="1" value="1">
             </div>
             <button class="btn" id="add-your-fruit">Add to Offer</button>
@@ -352,14 +352,14 @@
           <h2 class="section-title">Their Offer</h2>
           <div class="fruit-selector">
             <div class="fruit-input">
-              <label for="their-fruit">Select Fruit</label>
+              <label for="their-fruit">Select Companion</label>
               <select id="their-fruit">
-                <option value="">Select a fruit</option>
-                <!-- Fruits will be added by JavaScript -->
+                <option value="">Select a Companion</option>
+
               </select>
             </div>
             <div class="fruit-input">
-              <label for="their-amount">Amount <span class="tooltip">?<span class="tooltiptext">Number of this fruit they're offering</span></span></label>
+              <label for="their-amount">Amount <span class="tooltip">?<span class="tooltiptext">Number of this Comps they're offering</span></span></label>
               <input type="number" id="their-amount" min="1" value="1">
             </div>
             <button class="btn" id="add-their-fruit">Add to Their Offer</button>
@@ -391,9 +391,9 @@
       </div>
 
       <div style="margin-top: 2rem;">
-        <h2 class="section-title">Fruit Values</h2>
+        <h2 class="section-title">Companion Values</h2>
         <div class="fruit-list" id="fruit-list">
-          <!-- Fruits will be added by JavaScript -->
+
         </div>
       </div>
     </div>
@@ -401,7 +401,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Create background particles
+
       function createParticles() {
         const particlesContainer = document.getElementById('particles');
         const particleCount = Math.floor(window.innerWidth / 10);
@@ -429,22 +429,19 @@
       
       createParticles();
 
-      // Fruit data - REPLACE WITH YOUR GAME'S FRUITS AND VALUES
+
       const fruits = [
-        { name: "Apple", value: 1000, image: "https://via.placeholder.com/50" },
-        { name: "Banana", value: 1500, image: "https://via.placeholder.com/50" },
-        { name: "Grape", value: 2500, image: "https://via.placeholder.com/50" },
-        { name: "Orange", value: 3500, image: "https://via.placeholder.com/50" },
-        { name: "Pineapple", value: 5000, image: "https://via.placeholder.com/50" },
-        { name: "Strawberry", value: 7500, image: "https://via.placeholder.com/50" },
-        { name: "Watermelon", value: 10000, image: "https://via.placeholder.com/50" },
-        { name: "Dragon Fruit", value: 25000, image: "https://via.placeholder.com/50" },
-        { name: "Venom Fruit", value: 50000, image: "https://via.placeholder.com/50" },
-        { name: "Shadow Fruit", value: 75000, image: "https://via.placeholder.com/50" },
-        { name: "Control Fruit", value: 100000, image: "https://via.placeholder.com/50" },
-        { name: "Spirit Fruit", value: 150000, image: "https://via.placeholder.com/50" },
-        { name: "Dough Fruit", value: 250000, image: "https://via.placeholder.com/50" },
-        { name: "Leopard Fruit", value: 500000, image: "https://via.placeholder.com/50" },
+        { name: "Turbo", value: 5000, image: "https://static.wikia.nocookie.net/animesimulator/images/b/b6/Turbo.png/revision/latest/scale-to-width-down/110?cb=20250306195646" },
+        { name: "Seidon", value: 7500, image: "https://static.wikia.nocookie.net/animesimulator/images/3/35/Sei.png/revision/latest/scale-to-width-down/109?cb=20250620155145" },
+        { name: "Mahoraga", value: 10000, image: "https://static.wikia.nocookie.net/animesimulator/images/8/8b/Mahahahaha.png/revision/latest/scale-to-width-down/110?cb=20250621192900" },
+        { name: "Freeah", value: 25000, image: "https://static.wikia.nocookie.net/animesimulator/images/a/ac/Freeah.png/revision/latest/scale-to-width-down/109?cb=20250716195510" },
+        { name: "Sid", value: 50000, image: "https://static.wikia.nocookie.net/animesimulator/images/6/64/Ciddd.png/revision/latest?cb=20250716195415" },
+        { name: "Emperor Teach", value: 75000, image: "https://static.wikia.nocookie.net/animesimulator/images/0/0b/EMP.png/revision/latest?cb=20250716195631" },
+        { name: "Super Baybe", value: 100000, image: "https://static.wikia.nocookie.net/animesimulator/images/c/cf/Super_baybe.png/revision/latest/scale-to-width-down/110?cb=20240917135001" },
+        { name: "Naru Baryon", value: 150000, image: "https://static.wikia.nocookie.net/animesimulator/images/7/72/Borya.png/revision/latest/scale-to-width-down/110?cb=20250620155948" },
+        { name: "BroBro", value: 250000, image: "https://static.wikia.nocookie.net/animesimulator/images/d/dd/Brobroo.png/revision/latest?cb=20250716195540" },
+        { name: "Demon Galo", value: 300000, image: "https://static.wikia.nocookie.net/animesimulator/images/6/68/DemonGalo.png/revision/latest/scale-to-width-down/110?cb=20240914121502" },
+        { name: "Better World", value: 500000, image: "https://static.wikia.nocookie.net/animesimulator/images/c/c5/Dioooo.png/revision/latest?cb=20250716195604" },
       ];
 
       // Populate select dropdowns and fruit list
@@ -480,7 +477,7 @@
         fruitList.appendChild(fruitItem);
       });
 
-      // Trade calculation
+
       const yourOffer = [];
       const theirOffer = [];
       const yourOfferContainer = document.getElementById('your-offer');
@@ -488,7 +485,7 @@
       const calculateBtn = document.getElementById('calculate-trade');
       const tradeResult = document.getElementById('trade-result');
 
-      // Add fruits to offers
+
       document.getElementById('add-your-fruit').addEventListener('click', addToYourOffer);
       document.getElementById('add-their-fruit').addEventListener('click', addToTheirOffer);
       calculateBtn.addEventListener('click', calculateTrade);
@@ -585,7 +582,7 @@
         return num.toString();
       }
 
-      // Allow Enter key to add fruits
+
       document.getElementById('your-amount').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') addToYourOffer();
       });
