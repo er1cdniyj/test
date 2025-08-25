@@ -3,56 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Companion Trading Calculator</title>
+  <title>Anime Simulator Calculators</title>
   <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #00c3ff;
-      --secondary: #ff1b6b;
-      --bg-dark: #0e0e12;
-      --bg-card: #1c1c24;
-      --bg-element: #292933;
-      --border: #444;
+      --primary: #7e22ce;
+      --primary-glow: #c084fc;
+      --secondary: #06b6d4;
+      --secondary-glow: #22d3ee;
+      --accent: #f97316;
+      --accent-glow: #fdba74;
+      --bg-dark: #0f0f19;
+      --bg-card: #1a1a2e;
+      --bg-element: #252542;
+      --border: #4c4c78;
       --text-main: #f0f0f0;
-      --text-secondary: #bbb;
-      --accent: #222228;
+      --text-secondary: #a1a1aa;
+      --success: #22c55e;
+      --error: #ef4444;
+      --gold: #FFD700;
+      --atomic: #50C878;
     }
+    
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+    
     body {
       font-family: 'Oxanium', sans-serif;
-      background: var(--bg-dark);
+      background: linear-gradient(135deg, #0a0a12 0%, #1a1a2e 50%, #16213e 100%);
       color: var(--text-main);
       min-height: 100vh;
-      padding: 2rem 1rem;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
       overflow-x: hidden;
     }
-    .bg-grid {
+    
+    
+    .bg-anime {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: var(--bg-dark);
-      opacity: 0.8;
-      background-image: 
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: gridMove 120s linear infinite;
+      opacity: 0.15;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(126, 34, 206, 0.4) 0%, transparent 20%),
+        radial-gradient(circle at 90% 70%, rgba(6, 182, 212, 0.4) 0%, transparent 20%),
+        radial-gradient(circle at 50% 30%, rgba(249, 115, 22, 0.3) 0%, transparent 30%);
+      animation: pulseBackground 15s ease infinite;
     }
-    @keyframes gridMove {
-      0% { background-position: 0 0; }
-      100% { background-position: 1000px 1000px; }
+    
+    @keyframes pulseBackground {
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: 0.2; }
     }
+    
     .bg-particles {
       position: fixed;
       top: 0;
@@ -62,6 +75,7 @@
       z-index: -2;
       overflow: hidden;
     }
+    
     .particle {
       position: absolute;
       background: var(--primary);
@@ -69,89 +83,415 @@
       opacity: 0.15;
       animation: float linear infinite;
     }
+    
     @keyframes float {
       to { transform: translateY(-100vh) translateX(20vw); }
     }
-    .navbar {
+    
+    
+    .header {
       width: 100%;
       max-width: 1200px;
-      background: var(--accent);
-      padding: 1rem;
-      border-radius: 0.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 10px rgba(0, 195, 255, 0.1);
-      z-index: 10;
       display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-    .navbar a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin: 0 0.75rem;
-      transition: all 0.2s ease;
-    }
-    .navbar a:hover {
-      color: var(--secondary);
-    }
-    .main-container {
-      width: 100%;
-      max-width: 1200px;
-      z-index: 10;
-    }
-    .calculator-container {
-      background: rgba(28, 28, 36, 0.85);
-      backdrop-filter: blur(10px);
-      width: 100%;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 0 30px rgba(0, 195, 255, 0.05);
-      border: 1px solid var(--border);
-    }
-    .title {
-      text-align: center;
-      font-size: 2rem;
+      flex-direction: column;
+      align-items: center;
       margin-bottom: 1rem;
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .logo {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.75rem;
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+    
+    .logo i {
+      font-size: 1.5rem;
+      color: white;
+    }
+    
+    .title {
+      font-size: 2rem;
       background: linear-gradient(90deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px rgba(126, 34, 206, 0.3);
     }
+    
     .subtitle {
-      text-align: center;
       color: var(--text-secondary);
       font-size: 0.9rem;
-      margin-bottom: 2rem;
+      text-align: center;
+      max-width: 600px;
+      margin-bottom: 1rem;
     }
+    
+    .navbar {
+      display: flex;
+      background: var(--bg-card);
+      padding: 0.4rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .nav-btn {
+      padding: 0.6rem 1.2rem;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-family: 'Oxanium', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      box-shadow: 0 0 10px rgba(126, 34, 206, 0.4);
+    }
+    
+    .nav-btn:hover:not(.active) {
+      background: rgba(126, 34, 206, 0.1);
+      color: var(--primary-glow);
+    }
+    
+    
+    .main-container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .calculator-container {
+      background: linear-gradient(to bottom, rgba(26, 26, 46, 0.95), rgba(26, 26, 46, 0.85));
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 1rem;
+    }
+    
+    .calculator-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+    
+    .calculator-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+      color: var(--primary-glow);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .calculator-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: 1.2rem;
+    }
+    
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    
+    @media (min-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    
+    .form-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    
+    .form-input, .form-select {
+      background: var(--bg-element);
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      padding: 0.6rem 0.8rem;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      font-family: 'Oxanium', sans-serif;
+      transition: all 0.3s ease;
+    }
+    
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.3);
+    }
+    
+    .checkbox-group {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+    
+    .checkbox-input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--primary);
+    }
+    
+    
+    .section {
+      background: rgba(37, 37, 66, 0.5);
+      padding: 1rem;
+      border-radius: 0.6rem;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(76, 76, 120, 0.3);
+    }
+    
+    .section-title {
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    
+    
+    .btn {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 0.7rem;
+      border: none;
+      border-radius: 0.6rem;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s ease;
+      font-family: 'Oxanium', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(6, 182, 212, 0.3);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-element);
+      color: var(--text-main);
+    }
+    
+    .btn-secondary:hover {
+      box-shadow: 0 6px 15px rgba(76, 76, 120, 0.3);
+    }
+    
+    
+    .profile-controls {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+    }
+    
+    .profile-input {
+      flex-grow: 1;
+      background: var(--bg-element);
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      padding: 0.4rem 0.8rem;
+      color: var(--text-main);
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.85rem;
+    }
+    
+    .profile-btn {
+      background: var(--bg-element);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      padding: 0.4rem 0.6rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      font-family: 'Oxanium', sans-serif;
+    }
+    
+    .profile-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    
+    .result {
+      margin-top: 1.5rem;
+      background: rgba(37, 37, 66, 0.7);
+      padding: 1.2rem;
+      border-radius: 0.6rem;
+      border-left: 3px solid var(--primary);
+      font-size: 0.9rem;
+    }
+    
+    .result-item {
+      margin-bottom: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .result-label {
+      color: var(--text-secondary);
+    }
+    
+    .result-value {
+      font-weight: 600;
+      color: var(--primary-glow);
+    }
+    
+    
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      background: var(--primary);
+      color: var(--bg-dark);
+      border-radius: 50%;
+      text-align: center;
+      font-size: 10px;
+      line-height: 14px;
+      cursor: help;
+    }
+    
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 180px;
+      background-color: var(--bg-element);
+      color: var(--text-main);
+      text-align: center;
+      border-radius: 6px;
+      padding: 6px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+    }
+    
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    
+    .tab-content {
+      display: none;
+      width: 100%;
+      align-items: center;
+      flex-direction: column;
+    }
+    
+    .tab-content.active {
+      display: flex;
+    }
+    
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .calculator-container {
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    
     .trade-container {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 1.2rem;
     }
+    
     @media (min-width: 768px) {
       .trade-container {
         grid-template-columns: 1fr 1fr;
       }
     }
+    
     .trade-panel {
-      background: rgba(0, 195, 255, 0.1);
-      padding: 1.5rem;
-      border-radius: 0.5rem;
-      border: 1px solid rgba(0, 195, 255, 0.2);
-      min-height: 300px;
+      background: rgba(37, 37, 66, 0.7);
+      padding: 1.2rem;
+      border-radius: 0.6rem;
+      border: 1px solid rgba(76, 76, 120, 0.5);
+      min-height: 250px;
     }
+    
     .panel-title {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      color: var(--primary-glow);
       text-align: center;
     }
+    
     .add-companion-btn {
       background: var(--bg-element);
       border: 2px dashed var(--border);
-      border-radius: 0.5rem;
-      padding: 1.5rem;
+      border-radius: 0.6rem;
+      padding: 1.2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -159,102 +499,85 @@
       cursor: pointer;
       transition: all 0.2s;
       color: var(--text-secondary);
-      font-size: 1rem;
-      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
     }
+    
     .add-companion-btn:hover {
       border-color: var(--primary);
       color: var(--primary);
     }
+    
     .add-companion-btn i {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.7rem;
+      margin-bottom: 0.4rem;
     }
+    
     .selected-companions {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.6rem;
     }
+    
     .companion-item {
       background: var(--bg-element);
-      border-radius: 0.5rem;
-      padding: 0.75rem;
+      border-radius: 0.4rem;
+      padding: 0.6rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
+      font-size: 0.85rem;
     }
+    
     .companion-info {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.6rem;
     }
+    
     .companion-image {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       object-fit: contain;
       border-radius: 50%;
+      background: var(--bg-dark);
+      padding: 2px;
     }
+    
     .companion-name {
       font-weight: 600;
     }
+    
     .companion-amount {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
+    
     .amount-input {
       background: var(--bg-dark);
       border: 1px solid var(--border);
-      border-radius: 0.25rem;
-      padding: 0.25rem 0.5rem;
+      border-radius: 0.4rem;
+      padding: 0.3rem 0.4rem;
       color: var(--text-main);
-      width: 60px;
+      width: 50px;
       text-align: center;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.8rem;
     }
+    
     .remove-btn {
       background: none;
       border: none;
-      color: var(--secondary);
+      color: var(--error);
       cursor: pointer;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       display: flex;
       align-items: center;
     }
-    .calculate-btn {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      font-size: 1rem;
-      font-weight: 700;
-      padding: 0.75rem;
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      width: 100%;
-      transition: transform 0.2s, box-shadow 0.2s;
-      margin-top: 1.5rem;
-    }
-    .calculate-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0, 195, 255, 0.3);
-    }
-    .result {
-      margin-top: 2rem;
-      background: var(--accent);
-      padding: 1.5rem;
-      border-left: 4px solid var(--primary);
-      border-radius: 0.5rem;
-      display: none;
-    }
-    .result-item {
-      margin-bottom: 0.75rem;
-      display: flex;
-      justify-content: space-between;
-    }
-    .result-value {
-      font-weight: 600;
-      color: var(--primary);
-    }
-    /* Companion Select Modal */
+    
+    
     .modal {
       display: none;
       position: fixed;
@@ -267,43 +590,49 @@
       align-items: center;
       justify-content: center;
     }
+    
     .modal-content {
       background: var(--bg-card);
-      border-radius: 0.5rem;
+      border-radius: 0.6rem;
       width: 90%;
-      max-width: 800px;
-      max-height: 80vh;
+      max-width: 700px;
+      max-height: 70vh;
       overflow-y: auto;
-      padding: 1.5rem;
+      padding: 1.2rem;
       border: 1px solid var(--primary);
-      box-shadow: 0 0 30px rgba(0, 195, 255, 0.2);
+      box-shadow: 0 0 25px rgba(126, 34, 206, 0.3);
     }
+    
     .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
+    
     .modal-title {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       color: var(--primary);
     }
+    
     .close-modal {
       background: none;
       border: none;
       color: var(--text-secondary);
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       cursor: pointer;
     }
+    
     .companion-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 0.8rem;
     }
+    
     .companion-option {
       background: var(--bg-element);
-      border-radius: 0.5rem;
-      padding: 0.75rem;
+      border-radius: 0.4rem;
+      padding: 0.6rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -311,90 +640,533 @@
       transition: all 0.2s;
       border: 1px solid transparent;
     }
+    
     .companion-option:hover {
       border-color: var(--primary);
       transform: translateY(-3px);
     }
+    
     .companion-option img {
-      width: 50px;
-      height: 50px;
+      width: 45px;
+      height: 45px;
       object-fit: contain;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
+      background: var(--bg-dark);
+      border-radius: 50%;
+      padding: 4px;
     }
+    
     .companion-option span {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       text-align: center;
     }
+    
     .companion-value {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       color: var(--primary);
-      margin-top: 0.25rem;
+      margin-top: 0.2rem;
+    }
+    
+    
+    .trait-selector {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--bg-element);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1;
+      border: 1px solid var(--border);
+      font-size: 0.7rem;
+    }
+    
+    .trait-options {
+      position: absolute;
+      top: 25px;
+      right: 0;
+      background: var(--bg-element);
+      border-radius: 0.4rem;
+      padding: 0.4rem;
+      display: none;
+      flex-direction: column;
+      gap: 0.4rem;
+      z-index: 2;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .trait-option {
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.2rem;
+      cursor: pointer;
+      font-size: 0.7rem;
+      white-space: nowrap;
+    }
+    
+    .trait-option:hover {
+      background: var(--bg-dark);
+    }
+    
+    .trait-option.normal {
+      color: var(--text-main);
+    }
+    
+    .trait-option.gold {
+      color: var(--gold);
+    }
+    
+    .trait-option.atomic {
+      color: var(--atomic);
+    }
+    
+    .trait-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 0.2rem;
+    }
+    
+    .trait-indicator.normal {
+      background: var(--text-secondary);
+    }
+    
+    .trait-indicator.gold {
+      background: var(--gold);
+    }
+    
+    .trait-indicator.atomic {
+      background: var(--atomic);
+    }
+    
+    .trait-display {
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      font-size: 0.6rem;
+      padding: 0.1rem 0.25rem;
+      border-radius: 0.2rem;
+      font-weight: bold;
+    }
+    
+    .trait-display.gold {
+      background: var(--gold);
+      color: #000;
+    }
+    
+    .trait-display.atomic {
+      background: var(--atomic);
+      color: #000;
+    }
+    .values-container {
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 2rem;
+    }
+    
+    .values-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .values-title {
+      font-size: 2.2rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    
+    .values-subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+    
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .value-card {
+      background: var(--bg-card);
+      border-radius: 0.8rem;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    
+    .value-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .value-card-header {
+      padding: 1rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .value-card-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+    
+    .value-card-image i {
+      font-size: 1.5rem;
+      color: white;
+    }
+    
+    .value-card-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .value-card-body {
+      padding: 1.2rem;
+    }
+    
+    .value-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .value-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .value-label {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    
+    .value-amount {
+      font-weight: 700;
+      color: var(--primary-glow);
+    }
+    
+    .value-tag {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 0.3rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    
+    .value-tag.normal {
+      background: var(--bg-element);
+      color: var(--text-main);
+    }
+    
+    .value-tag.gold {
+      background: var(--gold);
+      color: #000;
+    }
+    
+    .value-tag.atomic {
+      background: var(--atomic);
+      color: #000;
+    }
+    
+    .value-section-title {
+      font-size: 1.1rem;
+      color: var(--secondary);
+      margin: 1.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--secondary);
     }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <div class="bg-grid"></div>
+  
+  <div class="bg-anime"></div>
   <div class="bg-particles" id="particles"></div>
 
-  <nav class="navbar">
-    <a href="index2.html">Coin Calculator</a>
-    <a href="index.html">Stats Calculator</a>
-    <a href="index3.html">Trading Calculator</a>
-  </nav>
+  <div class="header">
+    <div class="logo-container">
+      <div class="logo">
+        <i class="fas fa-calculator"></i>
+      </div>
+      <h1 class="title">Anime Simulator Calculators</h1>
+    </div>
+    <p class="subtitle">Powerful calculators for your anime gaming needs</p>
+     <p class="subtitle">Made by babatunde2289</p>
+    
+    <div class="navbar">
+      <button class="nav-btn active" data-tab="stats-calc">
+        <i class="fas fa-chart-line"></i> Stats
+      </button>
+      <button class="nav-btn" data-tab="coin-calc">
+        <i class="fas fa-coins"></i> Coin
+      </button>
+      <button class="nav-btn" data-tab="goal-calc">
+        <i class="fas fa-bullseye"></i> Goal
+      </button>
+      <button class="nav-btn" data-tab="trade-calc">
+        <i class="fas fa-exchange-alt"></i> Trading
+      </button>
+    </div>
+  </div>
 
   <div class="main-container">
-    <div class="calculator-container">
-      <h1 class="title">Companion Trading Calculator</h1>
-      <p class="subtitle">Calculate the value of your companion trades</p>
-      <p class="subtitle">Special thanks to BruceWaynie for helping with the values!</p>
+    <!-- Stats Calculator -->
+    <div class="tab-content active" id="stats-calc">
+      <div class="calculator-container">
+        <h2 class="calculator-title"><i class="fas fa-chart-line"></i> Stats Gain Calculator</h2>
+        <p class="calculator-subtitle">Calculate your training gains</p>
 
-      <div class="trade-container">
-        <!-- Your Offer Panel -->
-        <div class="trade-panel">
-          <h2 class="panel-title">Your Offer</h2>
-          <div class="add-companion-btn" id="add-your-companion">
-            <i class="fas fa-plus-circle"></i>
-            <span>Add Companion</span>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="statType" class="form-label">Training Type
+              <div class="tooltip">?<span class="tooltiptext">Select the stat you're training (Strength, Energy, Defense, or Sword)</span></div>
+            </label>
+            <select id="statType" class="form-select">
+              <option value="strength">Strength</option>
+              <option value="energy">Energy</option>
+              <option value="defense">Defense</option>
+              <option value="sword">Sword</option>
+            </select>
           </div>
-          <div class="selected-companions" id="your-offer"></div>
+          <div class="form-group">
+            <label for="gainPerTick" class="form-label">Gain Per Tick
+              <div class="tooltip">?<span class="tooltiptext">Amount gained each training tick (e.g. 1.5sx or 1e21)</span></div>
+            </label>
+            <input type="text" id="gainPerTick" class="form-input" placeholder="e.g. 1.5sx or 1e21" required>
+          </div>
+          <div class="form-group">
+            <label for="time" class="form-label">Time (minutes)
+              <div class="tooltip">?<span class="tooltiptext">Duration of your training session in minutes</span></div>
+            </label>
+            <input type="number" id="time" class="form-input" placeholder="e.g. 60" required>
+          </div>
         </div>
 
-        <!-- Their Offer Panel -->
-        <div class="trade-panel">
-          <h2 class="panel-title">Their Offer</h2>
-          <div class="add-companion-btn" id="add-their-companion">
-            <i class="fas fa-plus-circle"></i>
-            <span>Add Companion</span>
+        <div class="section">
+          <h3 class="section-title"><i class="fas fa-robot"></i> Companion Settings</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="companionActive" class="form-label">Companion Active
+                <div class="tooltip">?<span class="tooltiptext">Toggle if you have an active companion</span></div>
+              </label>
+              <select id="companionActive" class="form-select">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="companionGain" class="form-label">Companion Gain Per Tick
+                <div class="tooltip">?<span class="tooltiptext">Amount your companion gives per tick (e.g. 1.5qd or 1e15)</span></div>
+              </label>
+              <input type="text" id="companionGain" class="form-input" placeholder="e.g. 1.5qd or 1e15">
+            </div>
           </div>
-          <div class="selected-companions" id="their-offer"></div>
         </div>
+
+        <div class="profile-controls">
+          <input type="text" id="profileName" class="profile-input" placeholder="Profile name">
+          <button class="profile-btn" id="saveProfileBtn"><i class="fas fa-save"></i> Save</button>
+          <button class="profile-btn" id="loadProfileBtn"><i class="fas fa-folder-open"></i> Load</button>
+        </div>
+
+        <button class="btn" id="calculateBtn"><i class="fas fa-calculator"></i> Calculate Gains</button>
+        
+        <div class="result" id="result"></div>
       </div>
+    </div>
 
-      <button class="calculate-btn" id="calculate-trade">Calculate Trade</button>
-      
-      <div class="result" id="trade-result">
-        <div class="result-item">
-          <span>Your Offer Value:</span>
-          <span class="result-value" id="your-value">0</span>
+    
+    <div class="tab-content" id="coin-calc">
+      <div class="calculator-container">
+        <h2 class="calculator-title"><i class="fas fa-coins"></i> Coin Calculator</h2>
+        <p class="calculator-subtitle">Calculate your coin earnings based on rank and bonuses</p>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="rankSelect" class="form-label">Select Rank</label>
+            <select id="rankSelect" class="form-select">
+              <option value="0">Rookie</option>
+              <option value="1">Ninja</option>
+              <option value="2">Pirate</option>
+              <option value="3">Ghoul</option>
+              <option value="4">Hero</option>
+              <option value="5">Reaper</option>
+              <option value="6">Warrior</option>
+              <option value="7">Sin</option>
+              <option value="8">Mage</option>
+              <option value="9">Demon</option>
+              <option value="10">Emperor</option>
+              <option value="11">Elder</option>
+              <option value="12">Overlord</option>
+              <option value="13">Leader</option>
+              <option value="14">Deity</option>
+              <option value="15">Sage</option>
+              <option value="16">Mask</option>
+              <option value="17">Shinigami</option>
+              <option value="18">Hashira</option>
+              <option value="19">Destroyer</option>
+              <option value="20">Otsutsuki</option>
+              <option value="21">Pirate King</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="coinTimeInput" class="form-label">Time (minutes)
+              <div class="tooltip">?<span class="tooltiptext">Duration of coin earning in minutes</span></div>
+            </label>
+            <input type="number" id="coinTimeInput" class="form-input" placeholder="e.g. 60" required>
+          </div>
         </div>
-        <div class="result-item">
-          <span>Their Offer Value:</span>
-          <span class="result-value" id="their-value">0</span>
+
+        <div class="section">
+          <h3 class="section-title"><i class="fas fa-gem"></i> Bonuses</h3>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="doubleCoins" class="checkbox-input">
+              2x Coins Gamepass
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="goldCompanion" class="checkbox-input">
+              Gold Companion (+20%)
+            </label>
+          </div>
         </div>
-        <div class="result-item" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
-          <span style="font-weight: 700;">Trade Result:</span>
-          <span class="result-value" style="font-weight: 700;" id="trade-result-text">Fair Trade</span>
+
+        <button class="btn" id="calculateCoinsBtn"><i class="fas fa-coins"></i> Calculate Earnings</button>
+        
+        <div class="result" id="coinResult"></div>
+      </div>
+    </div>
+
+    
+    <div class="tab-content" id="goal-calc">
+      <div class="calculator-container">
+        <h2 class="calculator-title"><i class="fas fa-bullseye"></i> Goal Calculator</h2>
+        <p class="calculator-subtitle">Calculate time to reach your target</p>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="goalStatType" class="form-label">Training Type
+              <div class="tooltip">?<span class="tooltiptext">Select the stat you're training (Strength, Energy, Defense, or Sword)</span></div>
+            </label>
+            <select id="goalStatType" class="form-select">
+              <option value="strength">Strength</option>
+              <option value="energy">Energy</option>
+              <option value="defense">Defense</option>
+              <option value="sword">Sword</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="goalGainPerTick" class="form-label">Your Gain Per Tick
+              <div class="tooltip">?<span class="tooltiptext">Amount you gain each training tick (e.g. 1.5sx or 1e21)</span></div>
+            </label>
+            <input type="text" id="goalGainPerTick" class="form-input" placeholder="e.g. 1.5sx or 1e21">
+          </div>
+          <div class="form-group">
+            <label for="goalCompanionGain" class="form-label">Companion Gain Per Tick
+              <div class="tooltip">?<span class="tooltiptext">Amount your companion gives per tick (e.g. 1.5qd or 1e15)</span></div>
+            </label>
+            <input type="text" id="goalCompanionGain" class="form-input" placeholder="e.g. 1.5qd or 1e15">
+          </div>
+          <div class="form-group">
+            <label for="currentStat" class="form-label">Current Stat Value
+              <div class="tooltip">?<span class="tooltiptext">Your current stat value (e.g. 1.5sx or 1e21)</span></div>
+            </label>
+            <input type="text" id="currentStat" class="form-input" placeholder="e.g. 1.5sx or 1e21">
+          </div>
+          <div class="form-group">
+            <label for="desiredStat" class="form-label">Desired Stat Value
+              <div class="tooltip">?<span class="tooltiptext">Your target stat value (e.g. 2.5sx or 2.5e21)</span></div>
+            </label>
+            <input type="text" id="desiredStat" class="form-input" placeholder="e.g. 2.5sx or 2.5e21">
+          </div>
         </div>
-        <div class="result-item">
-          <span>Difference:</span>
-          <span class="result-value" id="difference-value">0</span>
+
+        <div class="profile-controls">
+          <input type="text" id="goalProfileName" class="profile-input" placeholder="Profile name">
+          <button class="profile-btn" id="saveGoalProfileBtn"><i class="fas fa-save"></i> Save</button>
+          <button class="profile-btn" id="loadGoalProfileBtn"><i class="fas fa-folder-open"></i> Load</button>
+        </div>
+
+        <button class="btn" id="calculateGoalBtn"><i class="fas fa-bullseye"></i> Calculate Time Needed</button>
+        
+        <div class="result" id="goalResult"></div>
+      </div>
+    </div>
+
+    
+    <div class="tab-content" id="trade-calc">
+      <div class="calculator-container">
+        <h2 class="calculator-title"><i class="fas fa-exchange-alt"></i> Companion Trading Calculator</h2>
+        <p class="calculator-subtitle">Calculate the value of your companion trades</p>
+       <b> <p class="calculator-subtitle">Special thanks to Harry the Tester for making these values!  </p></b>
+         <b>  <p class="calculator-subtitle">Trading is at your own risk! Do not DM devs or Testers help for scams</p></b>
+
+
+        <div class="trade-container">
+          
+          <div class="trade-panel">
+            <h2 class="panel-title">Your Offer</h2>
+            <div class="add-companion-btn" id="add-your-companion">
+              <i class="fas fa-plus-circle"></i>
+              <span>Add Companion</span>
+            </div>
+            <div class="selected-companions" id="your-offer"></div>
+          </div>
+
+          
+          <div class="trade-panel">
+            <h2 class="panel-title">Their Offer</h2>
+            <div class="add-companion-btn" id="add-their-companion">
+              <i class="fas fa-plus-circle"></i>
+              <span>Add Companion</span>
+            </div>
+            <div class="selected-companions" id="their-offer"></div>
+          </div>
+        </div>
+
+        <button class="btn" id="calculate-trade"><i class="fas fa-calculator"></i> Calculate Trade</button>
+        
+        <div class="result" id="trade-result">
+          <div class="result-item">
+            <span>Your Offer Value:</span>
+            <span class="result-value" id="your-value">0</span>
+          </div>
+          <div class="result-item">
+            <span>Their Offer Value:</span>
+            <span class="result-value" id="their-value">0</span>
+          </div>
+          <div class="result-item" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+            <span style="font-weight: 700;">Trade Result:</span>
+            <span class="result-value" style="font-weight: 700;" id="trade-result-text">Fair Trade</span>
+          </div>
+          <div class="result-item">
+            <span>Difference:</span>
+            <span class="result-value" id="difference-value">0</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Companion Selection Modal -->
+  
   <div class="modal" id="companion-modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -409,16 +1181,16 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Create background particles
+      
       function createParticles() {
         const particlesContainer = document.getElementById('particles');
-        const particleCount = Math.floor(window.innerWidth / 10);
+        const particleCount = Math.floor(window.innerWidth / 15);
         
         for (let i = 0; i < particleCount; i++) {
           const particle = document.createElement('div');
           particle.classList.add('particle');
           
-          const size = Math.random() * 5 + 1;
+          const size = Math.random() * 4 + 1;
           const posX = Math.random() * window.innerWidth;
           const posY = Math.random() * window.innerHeight;
           const duration = Math.random() * 30 + 20;
@@ -431,51 +1203,790 @@
           particle.style.animationDuration = `${duration}s`;
           particle.style.animationDelay = `${delay}s`;
           
+          
+          const colors = ['var(--primary)', 'var(--secondary)', 'var(--accent)'];
+          particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+          
           particlesContainer.appendChild(particle);
         }
       }
       
       createParticles();
 
-      // Companion data
-      const companions = [
-        { name: "Turbo", value: 500, image: "turbo.png" },
-        { name: "Seidon", value: 100, image: "seidon.png" },
-        { name: "Mahoraga", value: 750, image: "m.png" },
-        { name: "Freeah", value: 2000, image: "freeah.png" },
-        { name: "Sid", value: 3000, image: "cid.png" },
-        { name: "Emperor Teach", value: 95000, image: "emp.png" },
-        { name: "Super Baybe", value: 100000, image: "sbb.png" },
-        { name: "Naru Baryon", value: 300000, image: "naru.png" },
-        { name: "BroBro", value: 920000, image: "brobro.png" },
-        { name: "Demon Galo", value: 900000, image: "galo.png" },
-        { name: "Better World", value: 1000000, image: "betterworld.png" },
+      
+      const tabButtons = document.querySelectorAll('.nav-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const tabId = button.getAttribute('data-tab');
+          
+          
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          
+          tabContents.forEach(content => content.classList.remove('active'));
+          document.getElementById(tabId).classList.add('active');
+        });
+      });
+
+      
+      const ticksPerMinute = {
+        strength: 55,
+        energy: 28,
+        defense: 36,
+        sword: 55
+      };
+      const companionTicksPerMinute = 10;
+
+      
+      const ranks = [
+        { name: "Rookie", coinPerMinute: 5 },
+        { name: "Ninja", coinPerMinute: 10 },
+        { name: "Pirate", coinPerMinute: 25 },
+        { name: "Ghoul", coinPerMinute: 50 },
+        { name: "Hero", coinPerMinute: 100 },
+        { name: "Reaper", coinPerMinute: 250 },
+        { name: "Warrior", coinPerMinute: 500 },
+        { name: "Sin", coinPerMinute: 1000 },
+        { name: "Mage", coinPerMinute: 5000 },
+        { name: "Demon", coinPerMinute: 10000 },
+        { name: "Emperor", coinPerMinute: 50000 },
+        { name: "Elder", coinPerMinute: 100000 },
+        { name: "Overlord", coinPerMinute: 500000 },
+        { name: "Leader", coinPerMinute: 1000000 },
+        { name: "Deity", coinPerMinute: 5000000 },
+        { name: "Sage", coinPerMinute: 10000000 },
+        { name: "Mask", coinPerMinute: 50000000 },
+        { name: "Shinigami", coinPerMinute: 100000000 },
+        { name: "Hashira", coinPerMinute: 500000000 },
+        { name: "Destroyer", coinPerMinute: 1000000000 },
+        { name: "Otsutsuki", coinPerMinute: 5000000000 },
+        { name: "Pirate King", coinPerMinute: 10000000000 }
       ];
 
-      // Trade state
-      let currentPanel = null; // Tracks which panel (yours/theirs) is adding companions
+      
+      function parseNumberWithSuffix(input) {
+        if (!input) return NaN;
+        if (/^[0-9.]+e[0-9]+$/i.test(input)) return parseFloat(input);
+        input = input.toString().trim().toLowerCase();
+        const suffixes = {
+          'k':1e3,'m':1e6,'b':1e9,'t':1e12,'qd':1e15,'qn':1e18,
+          'sx':1e21,'sp':1e24,'oc':1e27,'no':1e30,'dc':1e33
+        };
+        let suffix = '';
+        let numberPart = input;
+        for (const s in suffixes) {
+          if (input.endsWith(s)) {
+            suffix = s;
+            numberPart = input.substring(0, input.length - s.length);
+            break;
+          }
+        }
+        const number = parseFloat(numberPart);
+        return isNaN(number) ? NaN : suffix ? number * suffixes[suffix] : number;
+      }
+
+      function abbreviateNumber(num) {
+        const units = [
+          {v:1e33,s:"Dc"},{v:1e30,s:"No"},{v:1e27,s:"Oc"},{v:1e24,s:"Sp"},
+          {v:1e21,s:"Sx"},{v:1e18,s:"Qn"},{v:1e15,s:"Qd"},{v:1e12,s:"T"},
+          {v:1e9,s:"B"},{v:1e6,s:"M"},{v:1e3,s:"K"}
+        ];
+        for (const {v,s} of units) if (num >= v) return (num/v).toFixed(2)+s;
+        return num.toString();
+      }
+
+      function formatTime(minutes) {
+        if (minutes < 60) return `${minutes.toFixed(1)} minutes`;
+        const hours = minutes / 60;
+        if (hours < 24) return `${hours.toFixed(1)} hours`;
+        const days = hours / 24;
+        return `${days.toFixed(1)} days`;
+      }
+
+      
+      function calculateGains() {
+        const statType = document.getElementById("statType").value;
+        const gainPerTick = parseNumberWithSuffix(document.getElementById("gainPerTick").value);
+        const time = parseFloat(document.getElementById("time").value);
+        const hasCompanion = document.getElementById("companionActive").value === "true";
+        const companionGain = hasCompanion ? parseNumberWithSuffix(document.getElementById("companionGain").value) : 0;
+
+        if (isNaN(gainPerTick)) {
+          document.getElementById("result").innerHTML = `<div class="result-item" style="color:var(--error)">Please enter a valid gain per tick</div>`;
+          return;
+        }
+
+        if (isNaN(time) || time <= 0) {
+          document.getElementById("result").innerHTML = `<div class="result-item" style="color:var(--error)">Please enter a valid time</div>`;
+          return;
+        }
+
+        if (hasCompanion && isNaN(companionGain)) {
+          document.getElementById("result").innerHTML = `<div class="result-item" style="color:var(--error)">Please enter valid companion gains</div>`;
+          return;
+        }
+
+        const ticks = ticksPerMinute[statType] * time;
+        const mainGain = gainPerTick * ticks;
+        
+        let companionTotalGain = 0;
+        if (hasCompanion) {
+          const companionTicks = companionTicksPerMinute * time;
+          companionTotalGain = companionGain * companionTicks;
+        }
+
+        const totalGain = mainGain + companionTotalGain;
+
+        document.getElementById("result").innerHTML = `
+          <div class="result-item">
+            <span class="result-label">Training Type:</span>
+            <span class="result-value">${statType.charAt(0).toUpperCase()+statType.slice(1)}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Ticks Per Minute:</span>
+            <span class="result-value">${ticksPerMinute[statType]}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Total Ticks:</span>
+            <span class="result-value">${ticks}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Main Gain:</span>
+            <span class="result-value">${abbreviateNumber(mainGain)}</span>
+          </div>
+          ${hasCompanion ? `
+          <div class="result-item">
+            <span class="result-label">Companion Ticks:</span>
+            <span class="result-value">${companionTicksPerMinute * time}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Companion Gain:</span>
+            <span class="result-value">${abbreviateNumber(companionTotalGain)}</span>
+          </div>` : ''}
+          <div class="result-item" style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid var(--border)">
+            <span class="result-label" style="font-weight:700">Total Gain:</span>
+            <span class="result-value" style="font-weight:700">${abbreviateNumber(totalGain)}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Gain Per Minute:</span>
+            <span class="result-value">${abbreviateNumber(totalGain / time)}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Gain Per Hour:</span>
+            <span class="result-value">${abbreviateNumber(totalGain / time * 60)}</span>
+          </div>
+        `;
+      }
+      <div class="tab-content" id="values">
+      <div class="values-container">
+        <div class="values-header">
+          <h2 class="values-title">Companion Values</h2>
+          <p class="values-subtitle">Current market values for all companions</p>
+        </div>
+        
+        <h3 class="value-section-title">Regular Companions</h3>
+        <div class="values-grid">
+          <!-- WYTHICAL Companions -->
+          <div class="value-card">
+            <div class="value-card-header">
+              <div class="value-card-image">
+                <i class="fas fa-dragon"></i>
+              </div>
+              <h3 class="value-card-name">WYTHICAL</h3>
+            </div>
+            <div class="value-card-body">
+              <div class="value-item">
+                <span class="value-label">Permanent</span>
+                <span class="value-amount">1.325B</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Demand</span>
+                <span class="value-amount">10/10</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Trend</span>
+                <span class="value-amount">Overpaid</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Bell Price</span>
+                <span class="value-amount">15M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Fruit Type</span>
+                <span class="value-amount">Beast</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-card-header">
+              <div class="value-card-image">
+                <i class="fas fa-dragon"></i>
+              </div>
+              <h3 class="value-card-name">East Dragon</h3>
+            </div>
+            <div class="value-card-body">
+              <div class="value-item">
+                <span class="value-label">Regular</span>
+                <span class="value-amount">1.06B</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Demand</span>
+                <span class="value-amount">10/10</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Trend</span>
+                <span class="value-amount">Overpaid</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Bell Price</span>
+                <span class="value-amount">15M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Fruit Type</span>
+                <span class="value-amount">Beast</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-card-header">
+              <div class="value-card-image">
+                <i class="fas fa-dragon"></i>
+              </div>
+              <h3 class="value-card-name">Kitsune</h3>
+            </div>
+            <div class="value-card-body">
+              <div class="value-item">
+                <span class="value-label">Regular</span>
+                <span class="value-amount">265M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Permanent</span>
+                <span class="value-amount">265M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Demand</span>
+                <span class="value-amount">10/10</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Trend</span>
+                <span class="value-amount">Overpaid</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Bell Price</span>
+                <span class="value-amount">8M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Fruit Type</span>
+                <span class="value-amount">Beast</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-card-header">
+              <div class="value-card-image">
+                <i class="fas fa-snowflake"></i>
+              </div>
+              <h3 class="value-card-name">Yeti</h3>
+            </div>
+            <div class="value-card-body">
+              <div class="value-item">
+                <span class="value-label">Regular</span>
+                <span class="value-amount">140M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Permanent</span>
+                <span class="value-amount">140M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Demand</span>
+                <span class="value-amount">10/10</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Trend</span>
+                <span class="value-amount">Overpaid</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Bell Price</span>
+                <span class="value-amount">5M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Fruit Type</span>
+                <span class="value-amount">Beast</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-card-header">
+              <div class="value-card-image">
+                <i class="fas fa-fire"></i>
+              </div>
+              <h3 class="value-card-name">Gas</h3>
+            </div>
+            <div class="value-card-body">
+              <div class="value-item">
+                <span class="value-label">Regular</span>
+                <span class="value-amount">75M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Permanent</span>
+                <span class="value-amount">75M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Demand</span>
+                <span class="value-amount">9/10</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Trend</span>
+                <span class="value-amount">Stable</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Bell Price</span>
+                <span class="value-amount">3.2M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Fruit Type</span>
+                <span class="value-amount">Elemental</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-card-header">
+              <div class="value-card-image">
+                <i class="fas fa-cat"></i>
+              </div>
+              <h3 class="value-card-name">Leopard</h3>
+            </div>
+            <div class="value-card-body">
+              <div class="value-item">
+                <span class="value-label">Regular</span>
+                <span class="value-amount">55M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Permanent</span>
+                <span class="value-amount">55M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Demand</span>
+                <span class="value-amount">10/10</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Trend</span>
+                <span class="value-amount">Overpaid</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Bell Price</span>
+                <span class="value-amount">5M</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Fruit Type</span>
+                <span class="value-amount">Beast</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <h3 class="value-section-title">Special Companions</h3>
+        <div class="values-grid">
+          <!-- Special companions would go here -->
+          <div class="value-card">
+            <div class="value-card-header">
+              <div class="value-card-image">
+                <i class="fas fa-bolt"></i>
+              </div>
+              <h3 class="value-card-name">Turbo</h3>
+            </div>
+            <div class="value-card-body">
+              <div class="value-item">
+                <span class="value-label">Normal</span>
+                <span class="value-amount">1.5K</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Gold</span>
+                <span class="value-amount">1.85K <span class="value-tag gold">GOLD</span></span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Atomic</span>
+                <span class="value-amount">2.1K <span class="value-tag atomic">ATOMIC</span></span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-card-header">
+              <div class="value-card-image">
+                <i class="fas fa-water"></i>
+              </div>
+              <h3 class="value-card-name">Seidon</h3>
+            </div>
+            <div class="value-card-body">
+              <div class="value-item">
+                <span class="value-label">Normal</span>
+                <span class="value-amount">500</span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Gold</span>
+                <span class="value-amount">650 <span class="value-tag gold">GOLD</span></span>
+              </div>
+              <div class="value-item">
+                <span class="value-label">Atomic</span>
+                <span class="value-amount">750 <span class="value-tag atomic">ATOMIC</span></span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Add more special companions as needed -->
+        </div>
+        
+        <div class="calculator-subtitle" style="margin-top: 2rem; text-align: center;">
+          <p>Values last updated: about 18 hours ago</p>
+          <p>Special thanks to Harry the Tester for these values!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      
+      function calculateCoins() {
+        const selectedRankIndex = parseInt(document.getElementById("rankSelect").value);
+        const selectedRank = ranks[selectedRankIndex];
+        const doubleCoins = document.getElementById("doubleCoins").checked;
+        const goldCompanion = document.getElementById("goldCompanion").checked;
+        const timeInput = document.getElementById("coinTimeInput").value;
+        const time = parseInt(timeInput);
+
+        if (!timeInput || isNaN(time) || time <= 0) {
+          document.getElementById("coinResult").innerHTML = `
+            <div class="result-item">
+              <span style="color: var(--error);">Please enter a valid time</span>
+            </div>
+          `;
+          return;
+        }
+
+        let coinsPerMinute = selectedRank.coinPerMinute;
+        let bonuses = [];
+
+        if (doubleCoins) {
+          coinsPerMinute *= 2;
+          bonuses.push("2x Gamepass");
+        }
+
+        if (goldCompanion) {
+          coinsPerMinute *= 1.2;
+          bonuses.push("Gold Companion");
+        }
+
+        const totalCoins = coinsPerMinute * time;
+        const formattedCPM = abbreviateNumber(coinsPerMinute);
+        const formattedTotal = abbreviateNumber(totalCoins);
+
+        let resultHTML = `
+          <div class="result-item">
+            <span class="result-label">Rank:</span>
+            <span class="result-value">${selectedRank.name}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Coins/Min:</span>
+            <span class="result-value">${formattedCPM}</span>
+          </div>
+        `;
+
+        if (bonuses.length > 0) {
+          resultHTML += `
+            <div class="result-item">
+              <span class="result-label">Active Bonuses:</span>
+              <span class="result-value">${bonuses.join(" + ")}</span>
+            </div>
+          `;
+        }
+
+        resultHTML += `
+          <div class="result-item">
+            <span class="result-label">Time:</span>
+            <span class="result-value">${time} minutes</span>
+          </div>
+          <div class="result-item" style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 10px;">
+            <span class="result-label" style="font-size: 1.1em;">Total Earnings:</span>
+            <span class="result-value" style="font-size: 1.1em;">${formattedTotal}</span>
+          </div>
+        `;
+
+        document.getElementById("coinResult").innerHTML = resultHTML;
+      }
+
+      
+      function calculateTimeToGoal() {
+        const statType = document.getElementById("goalStatType").value;
+        const gainPerTick = parseNumberWithSuffix(document.getElementById("goalGainPerTick").value);
+        const companionGain = parseNumberWithSuffix(document.getElementById("goalCompanionGain").value) || 0;
+        const currentStat = parseNumberWithSuffix(document.getElementById("currentStat").value);
+        const desiredStat = parseNumberWithSuffix(document.getElementById("desiredStat").value);
+
+        if (isNaN(gainPerTick)) {
+          document.getElementById("goalResult").innerHTML = `<div class="result-item" style="color:var(--error)">Please enter a valid gain per tick</div>`;
+          return;
+        }
+
+        if (isNaN(currentStat)) {
+          document.getElementById("goalResult").innerHTML = `<div class="result-item" style="color:var(--error)">Please enter your current stat value</div>`;
+          return;
+        }
+
+        if (isNaN(desiredStat) || desiredStat <= currentStat) {
+          document.getElementById("goalResult").innerHTML = `<div class="result-item" style="color:var(--error)">Please enter a valid desired stat higher than current</div>`;
+          return;
+        }
+
+        const neededGain = desiredStat - currentStat;
+        const gainPerMinute = (gainPerTick * ticksPerMinute[statType]) + (companionGain * companionTicksPerMinute);
+        const minutesNeeded = neededGain / gainPerMinute;
+
+        document.getElementById("goalResult").innerHTML = `
+          <div class="result-item">
+            <span class="result-label">Training Type:</span>
+            <span class="result-value">${statType.charAt(0).toUpperCase()+statType.slice(1)}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Current Stat:</span>
+            <span class="result-value">${abbreviateNumber(currentStat)}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Desired Stat:</span>
+            <span class="result-value">${abbreviateNumber(desiredStat)}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Gain Needed:</span>
+            <span class="result-value">${abbreviateNumber(neededGain)}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Gain Per Minute:</span>
+            <span class="result-value">${abbreviateNumber(gainPerMinute)}</span>
+          </div>
+          <div class="result-item" style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid var(--border)">
+            <span class="result-label" style="font-weight:700">Time Needed:</span>
+            <span class="result-value" style="font-weight:700">${formatTime(minutesNeeded)}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">At This Rate You'll Reach It:</span>
+            <span class="result-value">${new Date(Date.now() + minutesNeeded * 60000).toLocaleString()}</span>
+          </div>
+        `;
+      }
+
+      
+      function saveProfile() {
+        const profileName = document.getElementById("profileName").value.trim();
+        if (!profileName) {
+          alert("Please enter a profile name");
+          return;
+        }
+        
+        const profile = {
+          statType: document.getElementById("statType").value,
+          gainPerTick: document.getElementById("gainPerTick").value,
+          companionActive: document.getElementById("companionActive").value,
+          companionGain: document.getElementById("companionGain").value,
+          time: document.getElementById("time").value
+        };
+        
+        localStorage.setItem(`trainingProfile_${profileName}`, JSON.stringify(profile));
+        alert(`Profile "${profileName}" saved!`);
+      }
+
+      function loadProfile() {
+        const profileName = document.getElementById("profileName").value.trim();
+        if (!profileName) {
+          alert("Please enter a profile name");
+          return;
+        }
+        
+        const savedProfile = localStorage.getItem(`trainingProfile_${profileName}`);
+        if (!savedProfile) {
+          alert(`Profile "${profileName}" not found!`);
+          return;
+        }
+        
+        try {
+          const profile = JSON.parse(savedProfile);
+          document.getElementById("statType").value = profile.statType;
+          document.getElementById("gainPerTick").value = profile.gainPerTick;
+          document.getElementById("companionActive").value = profile.companionActive;
+          document.getElementById("companionGain").value = profile.companionGain || "";
+          if (profile.time) document.getElementById("time").value = profile.time;
+        } catch (e) {
+          alert("Error loading profile");
+          console.error(e);
+        }
+      }
+
+      function saveGoalProfile() {
+        const profileName = document.getElementById("goalProfileName").value.trim();
+        if (!profileName) {
+          alert("Please enter a profile name");
+          return;
+        }
+        
+        const profile = {
+          statType: document.getElementById("goalStatType").value,
+          gainPerTick: document.getElementById("goalGainPerTick").value,
+          companionGain: document.getElementById("goalCompanionGain").value,
+          currentStat: document.getElementById("currentStat").value,
+          desiredStat: document.getElementById("desiredStat").value
+        };
+        
+        localStorage.setItem(`goalProfile_` + profileName, JSON.stringify(profile));
+        alert(`Profile "${profileName}" saved!`);
+      }
+
+      function loadGoalProfile() {
+        const profileName = document.getElementById("goalProfileName").value.trim();
+        if (!profileName) {
+          alert("Please enter a profile name");
+          return;
+        }
+        
+        const savedProfile = localStorage.getItem(`goalProfile_` + profileName);
+        if (!savedProfile) {
+          alert(`Profile "${profileName}" not found!`);
+          return;
+        }
+        
+        try {
+          const profile = JSON.parse(savedProfile);
+          document.getElementById("goalStatType").value = profile.statType;
+          document.getElementById("goalGainPerTick").value = profile.gainPerTick;
+          document.getElementById("goalCompanionGain").value = profile.companionGain || "";
+          document.getElementById("currentStat").value = profile.currentStat || "";
+          document.getElementById("desiredStat").value = profile.desiredStat || "";
+        } catch (e) {
+          alert("Error loading profile");
+          console.error(e);
+        }
+      }
+
+      
+      const companions = [
+        { 
+          name: "Turbo", 
+          value: 1500, 
+          goldValue: 1850, 
+          atomicValue: 2100, 
+          image: "turbo.png" 
+        },
+        { 
+          name: "Seidon", 
+          value: 500, 
+          goldValue: 650, 
+          atomicValue: 750, 
+          image: "seidon.png" 
+        },
+        { 
+          name: "Ultra Gogo", 
+          value: 9000, 
+          goldValue: 35000, 
+          atomicValue: 45000, 
+          image: "ui.png" 
+        },
+        { 
+          name: "Mahoraga", 
+          value: 3700, 
+          goldValue: 4000, 
+          atomicValue: 4200, 
+          image: "m.png" 
+        },
+        { 
+          name: "Freeah", 
+          value: 10000, 
+          goldValue: 40000, 
+          atomicValue: 50000, 
+          image: "freeah.png" 
+        },
+        { 
+          name: "Sid", 
+          value: 25000, 
+          goldValue: 75000, 
+          atomicValue: 100000, 
+          image: "cid.png" 
+        },
+        { 
+          name: "Emperor Teach", 
+          value: 200000, 
+          goldValue: 280000, 
+          atomicValue: 300000, 
+          image: "emp.png" 
+        },
+        { 
+          name: "Super Baybe", 
+          value: 300000, 
+          goldValue: 390000, 
+          atomicValue: 400000, 
+          image: "sbb.png" 
+        },
+        { 
+          name: "Naru Baryon", 
+          value: 400000, 
+          goldValue: 460000, 
+          atomicValue: 500000, 
+          image: "naru.png" 
+        },
+        { 
+          name: "BroBro", 
+          value: 770000, 
+          goldValue: 900000, 
+          atomicValue: 920000, 
+          image: "brobro.png" 
+        },
+        { 
+          name: "Demon Galo", 
+          value: 740000, 
+          goldValue: 880000, 
+          atomicValue: 900000, 
+          image: "galo.png" 
+        },
+        { 
+          name: "Better World", 
+          value: 920000, 
+          goldValue: 1080000, 
+          atomicValue: 1100000, 
+          image: "betterworld.png" 
+        },
+      ];
+
+     
+      let currentPanel = null; 
       const yourOffer = [];
       const theirOffer = [];
       const modal = document.getElementById('companion-modal');
       const companionGrid = document.getElementById('companion-grid');
 
-      // Populate companion grid in modal
-      companions.forEach(companion => {
-        const companionOption = document.createElement('div');
-        companionOption.classList.add('companion-option');
-        companionOption.innerHTML = `
-          <img src="${companion.image}" alt="${companion.name}">
-          <span>${companion.name}</span>
-          <span class="companion-value">${formatNumber(companion.value)}</span>
-        `;
-        companionOption.addEventListener('click', () => {
-          addCompanionToOffer(companion);
-          modal.style.display = 'none';
+      
+      function populateCompanionGrid() {
+        companionGrid.innerHTML = '';
+        companions.forEach(companion => {
+          const companionOption = document.createElement('div');
+          companionOption.classList.add('companion-option');
+          companionOption.innerHTML = `
+            <img src="${companion.image}" alt="${companion.name}">
+            <span>${companion.name}</span>
+            <span class="companion-value">${formatNumber(companion.value)}</span>
+          `;
+          companionOption.addEventListener('click', () => {
+            addCompanionToOffer(companion);
+            modal.style.display = 'none';
+          });
+          companionGrid.appendChild(companionOption);
         });
-        companionGrid.appendChild(companionOption);
-      });
+      }
 
-      // Set up add companion buttons
+      
       document.getElementById('add-your-companion').addEventListener('click', () => {
         currentPanel = 'yours';
         modal.style.display = 'flex';
@@ -486,15 +1997,15 @@
         modal.style.display = 'flex';
       });
 
-      // Close modal
+      
       document.getElementById('close-modal').addEventListener('click', () => {
         modal.style.display = 'none';
       });
 
-      // Calculate trade
+      
       document.getElementById('calculate-trade').addEventListener('click', calculateTrade);
 
-      // Add companion to the appropriate offer
+      
       function addCompanionToOffer(companion) {
         if (!currentPanel) return;
         
@@ -503,28 +2014,39 @@
           ? document.getElementById('your-offer') 
           : document.getElementById('their-offer');
         
-        // Check if companion already exists in offer
-        const existingIndex = offer.findIndex(c => c.name === companion.name);
+       
+        const existingIndex = offer.findIndex(c => c.name === companion.name && c.trait === undefined);
         if (existingIndex >= 0) {
           offer[existingIndex].amount += 1;
         } else {
           offer.push({
             ...companion,
-            amount: 1
+            amount: 1,
+            trait: undefined 
           });
         }
         
         updateOfferDisplay(offer, container);
       }
 
-      // Update the display of companions in a panel
+      
       function updateOfferDisplay(offer, container) {
         container.innerHTML = '';
         
         offer.forEach((companion, index) => {
           const companionItem = document.createElement('div');
           companionItem.classList.add('companion-item');
+          
+          
+          let traitBadge = '';
+          if (companion.trait === 'gold') {
+            traitBadge = '<span class="trait-display gold">GOLD</span>';
+          } else if (companion.trait === 'atomic') {
+            traitBadge = '<span class="trait-display atomic">ATOMIC</span>';
+          }
+          
           companionItem.innerHTML = `
+            ${traitBadge}
             <div class="companion-info">
               <img src="${companion.image}" alt="${companion.name}" class="companion-image">
               <span class="companion-name">${companion.name}</span>
@@ -535,53 +2057,120 @@
                 <i class="fas fa-times"></i>
               </button>
             </div>
+            <div class="trait-selector">
+              <i class="fas fa-tag"></i>
+              <div class="trait-options">
+                <div class="trait-option normal" data-trait="normal">
+                  <span class="trait-indicator normal"></span>Normal
+                </div>
+                <div class="trait-option gold" data-trait="gold">
+                  <span class="trait-indicator gold"></span>Gold
+                </div>
+                <div class="trait-option atomic" data-trait="atomic">
+                  <span class="trait-indicator atomic"></span>Atomic
+                </div>
+              </div>
+            </div>
           `;
           
-          // Set up amount change listener
+         
           const amountInput = companionItem.querySelector('.amount-input');
           amountInput.addEventListener('change', (e) => {
             const newAmount = parseInt(e.target.value) || 1;
             offer[index].amount = newAmount;
           });
           
-          // Set up remove button
+          
           const removeBtn = companionItem.querySelector('.remove-btn');
           removeBtn.addEventListener('click', () => {
             offer.splice(index, 1);
             updateOfferDisplay(offer, container);
           });
           
+          
+          const traitSelector = companionItem.querySelector('.trait-selector');
+          const traitOptions = companionItem.querySelector('.trait-options');
+          
+          traitSelector.addEventListener('click', (e) => {
+            e.stopPropagation();
+            traitOptions.style.display = traitOptions.style.display === 'flex' ? 'none' : 'flex';
+          });
+          
+          
+          const traitOptionButtons = companionItem.querySelectorAll('.trait-option');
+          traitOptionButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const trait = button.dataset.trait;
+              if (trait === 'normal') {
+                offer[index].trait = undefined;
+              } else {
+                offer[index].trait = trait;
+              }
+              updateOfferDisplay(offer, container);
+            });
+          });
+          
+          
+          document.addEventListener('click', function closeTraitSelector(e) {
+            if (!traitSelector.contains(e.target)) {
+              traitOptions.style.display = 'none';
+            }
+          });
+          
           container.appendChild(companionItem);
         });
       }
 
-      // Calculate the trade
+      
       function calculateTrade() {
         if (yourOffer.length === 0 || theirOffer.length === 0) {
           alert("Please add companions to both offers");
           return;
         }
 
-        // Calculate total values
-        const yourTotal = yourOffer.reduce((sum, c) => sum + (c.value * c.amount), 0);
-        const theirTotal = theirOffer.reduce((sum, c) => sum + (c.value * c.amount), 0);
+       
+        const yourTotal = yourOffer.reduce((sum, c) => {
+          let value;
+          if (c.trait === 'gold') {
+            value = c.goldValue * c.amount;
+          } else if (c.trait === 'atomic') {
+            value = c.atomicValue * c.amount;
+          } else {
+            value = c.value * c.amount;
+          }
+          return sum + value;
+        }, 0);
+        
+        const theirTotal = theirOffer.reduce((sum, c) => {
+          let value;
+          if (c.trait === 'gold') {
+            value = c.goldValue * c.amount;
+          } else if (c.trait === 'atomic') {
+            value = c.atomicValue * c.amount;
+          } else {
+            value = c.value * c.amount;
+          }
+          return sum + value;
+        }, 0);
+        
         const difference = theirTotal - yourTotal;
 
-        // Update UI
+       
         document.getElementById('your-value').textContent = formatNumber(yourTotal);
         document.getElementById('their-value').textContent = formatNumber(theirTotal);
         document.getElementById('difference-value').textContent = formatNumber(Math.abs(difference));
 
-        // Determine result
+        
         let resultText = "Fair Trade";
-        let resultColor = "#00c3ff";
+        let resultColor = "#7e22ce";
         
         if (difference > 0) {
           resultText = "Good Trade (You Profit)";
-          resultColor = "#00ff88";
+          resultColor = "#22c55e";
         } else if (difference < 0) {
           resultText = "Bad Trade (You Lose)";
-          resultColor = "#ff1b6b";
+          resultColor = "#ef4444";
         }
 
         document.getElementById('trade-result-text').textContent = resultText;
@@ -590,7 +2179,7 @@
         document.getElementById('trade-result').style.display = 'block';
       }
 
-      // Format numbers with K/M suffixes
+      
       function formatNumber(num) {
         if (num >= 1000000) {
           return (num / 1000000).toFixed(1) + 'M';
@@ -601,13 +2190,65 @@
         return num.toString();
       }
 
-      // Close modal when clicking outside
+      
       window.addEventListener('click', (e) => {
         if (e.target === modal) {
           modal.style.display = 'none';
         }
       });
+
+      
+      populateCompanionGrid();
+
+     
+      document.getElementById("calculateBtn").addEventListener("click", calculateGains);
+      document.getElementById("calculateCoinsBtn").addEventListener("click", calculateCoins);
+      document.getElementById("calculateGoalBtn").addEventListener("click", calculateTimeToGoal);
+      
+      document.getElementById("saveProfileBtn").addEventListener("click", saveProfile);
+      document.getElementById("loadProfileBtn").addEventListener("click", loadProfile);
+      document.getElementById("saveGoalProfileBtn").addEventListener("click", saveGoalProfile);
+      document.getElementById("loadGoalProfileBtn").addEventListener("click", loadGoalProfile);
+      
+     
+      const inputs = [
+        "gainPerTick", "time", "companionGain", 
+        "goalGainPerTick", "goalCompanionGain", "currentStat", "desiredStat",
+        "coinTimeInput"
+      ];
+      
+      inputs.forEach(id => {
+        document.getElementById(id).addEventListener("keypress", function(e) {
+          if (e.key === "Enter") {
+            if (id === "coinTimeInput") {
+              calculateCoins();
+            } else if (id === "gainPerTick" || id === "time" || id === "companionGain") {
+              calculateGains();
+            } else {
+              calculateTimeToGoal();
+            }
+          }document.addEventListener('DOMContentLoaded', function() {
+      // Previous JavaScript code remains unchanged
+      
+      // Add event listener for the new Values tab
+      const tabButtons = document.querySelectorAll('.nav-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const tabId = button.getAttribute('data-tab');
+          
+          // Update active button
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          // Show active tab content
+          tabContents.forEach(content => content.classList.remove('active'));
+          document.getElementById(tabId).classList.add('active');
+        });
+      });
     });
+       
   </script>
 </body>
 </html>
