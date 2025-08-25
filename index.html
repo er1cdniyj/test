@@ -807,7 +807,6 @@
     
     .value-card-header {
       padding: 1rem;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
       display: flex;
       align-items: center;
       gap: 0.8rem;
@@ -885,6 +884,71 @@
     .value-tag.atomic {
       background: var(--atomic);
       color: #000;
+    }
+    
+    .rarity-tag {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 0.3rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    
+    .rarity-common {
+      background: #a0a0a0;
+      color: #000;
+    }
+    
+    .rarity-uncommon {
+      background: #22c55e;
+      color: #000;
+    }
+    
+    .rarity-rare {
+      background: #3b82f6;
+      color: #fff;
+    }
+    
+    .rarity-epic {
+      background: #7e22ce;
+      color: #fff;
+    }
+    
+    .rarity-legendary {
+      background: #f59e0b;
+      color: #000;
+    }
+    
+    .rarity-mythic {
+      background: #ef4444;
+      color: #fff;
+    }
+    
+    .rarity-secret {
+      background: #000;
+      color: #fff;
+    }
+    
+    .rarity-exclusive {
+      background: #ec4899;
+      color: #fff;
+    }
+    
+    .copy-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 0.3rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Oxanium', sans-serif;
+    }
+    
+    .copy-btn:hover {
+      background: var(--secondary);
     }
     
     .value-section-title {
@@ -1188,268 +1252,354 @@
           <p class="values-subtitle">Current market values for all companions</p>
         </div>
         
-        <h3 class="value-section-title">Regular Companions</h3>
-        <div class="values-grid">
-          <!-- WYTHICAL Companions -->
-          <div class="value-card">
-            <div class="value-card-header">
-              <div class="value-card-image">
-                <i class="fas fa-dragon"></i>
-              </div>
-              <h3 class="value-card-name">WYTHICAL</h3>
+        <div class="tab-content active" id="values">
+    <div class="values-container">
+      <div class="values-header">
+        <h2 class="values-title">Companion Values</h2>
+        <p class="values-subtitle">Current market values for all companions</p>
+      </div>
+      
+      <h3 class="value-section-title">Regular Companions</h3>
+      <div class="values-grid">
+        <!-- WYTHICAL Companions -->
+        <div class="value-card">
+          <div class="value-card-header">
+            <div class="value-card-image">
+              <i class="fas fa-dragon"></i>
             </div>
-            <div class="value-card-body">
-              <div class="value-item">
-                <span class="value-label">Permanent</span>
-                <span class="value-amount">1.325B</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Demand</span>
-                <span class="value-amount">10/10</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Trend</span>
-                <span class="value-amount">Overpaid</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Bell Price</span>
-                <span class="value-amount">15M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Fruit Type</span>
-                <span class="value-amount">Beast</span>
-              </div>
-            </div>
+            <h3 class="value-card-name">Comp 1 <span class="rarity-tag rarity-mythic">Mythic</span></h3>
           </div>
-          
-          <div class="value-card">
-            <div class="value-card-header">
-              <div class="value-card-image">
-                <i class="fas fa-dragon"></i>
-              </div>
-              <h3 class="value-card-name">East Dragon</h3>
+          <div class="value-card-body">
+            <div class="value-item">
+              <span class="value-label">Permanent</span>
+              <span class="value-amount">1.325B</span>
             </div>
-            <div class="value-card-body">
-              <div class="value-item">
-                <span class="value-label">Regular</span>
-                <span class="value-amount">1.06B</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Demand</span>
-                <span class="value-amount">10/10</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Trend</span>
-                <span class="value-amount">Overpaid</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Bell Price</span>
-                <span class="value-amount">15M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Fruit Type</span>
-                <span class="value-amount">Beast</span>
-              </div>
+            <div class="value-item">
+              <span class="value-label">Demand</span>
+              <span class="value-amount">10/10</span>
             </div>
-          </div>
-          
-          <div class="value-card">
-            <div class="value-card-header">
-              <div class="value-card-image">
-                <i class="fas fa-dragon"></i>
-              </div>
-              <h3 class="value-card-name">Kitsune</h3>
+            <div class="value-item">
+              <span class="value-label">Trend</span>
+              <span class="value-amount">Overpaid</span>
             </div>
-            <div class="value-card-body">
-              <div class="value-item">
-                <span class="value-label">Regular</span>
-                <span class="value-amount">265M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Permanent</span>
-                <span class="value-amount">265M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Demand</span>
-                <span class="value-amount">10/10</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Trend</span>
-                <span class="value-amount">Overpaid</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Bell Price</span>
-                <span class="value-amount">8M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Fruit Type</span>
-                <span class="value-amount">Beast</span>
-              </div>
+            <div class="value-item">
+              <span class="value-label">Good For</span>
+              <span class="value-amount">Training, PVP</span>
             </div>
-          </div>
-          
-          <div class="value-card">
-            <div class="value-card-header">
-              <div class="value-card-image">
-                <i class="fas fa-snowflake"></i>
-              </div>
-              <h3 class="value-card-name">Yeti</h3>
+            <div class="value-item">
+              <span class="value-label">Bell Price</span>
+              <span class="value-amount">15M</span>
             </div>
-            <div class="value-card-body">
-              <div class="value-item">
-                <span class="value-label">Regular</span>
-                <span class="value-amount">140M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Permanent</span>
-                <span class="value-amount">140M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Demand</span>
-                <span class="value-amount">10/10</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Trend</span>
-                <span class="value-amount">Overpaid</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Bell Price</span>
-                <span class="value-amount">5M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Fruit Type</span>
-                <span class="value-amount">Beast</span>
-              </div>
+            <div class="value-item">
+              <span class="value-label">Fruit Type</span>
+              <span class="value-amount">Beast</span>
             </div>
-          </div>
-          
-          <div class="value-card">
-            <div class="value-card-header">
-              <div class="value-card-image">
-                <i class="fas fa-fire"></i>
-              </div>
-              <h3 class="value-card-name">Gas</h3>
-            </div>
-            <div class="value-card-body">
-              <div class="value-item">
-                <span class="value-label">Regular</span>
-                <span class="value-amount">75M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Permanent</span>
-                <span class="value-amount">75M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Demand</span>
-                <span class="value-amount">9/10</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Trend</span>
-                <span class="value-amount">Stable</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Bell Price</span>
-                <span class="value-amount">3.2M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Fruit Type</span>
-                <span class="value-amount">Elemental</span>
-              </div>
-            </div>
-          </div>
-          
-          <div class="value-card">
-            <div class="value-card-header">
-              <div class="value-card-image">
-                <i class="fas fa-cat"></i>
-              </div>
-              <h3 class="value-card-name">Leopard</h3>
-            </div>
-            <div class="value-card-body">
-              <div class="value-item">
-                <span class="value-label">Regular</span>
-                <span class="value-amount">55M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Permanent</span>
-                <span class="value-amount">55M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Demand</span>
-                <span class="value-amount">10/10</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Trend</span>
-                <span class="value-amount">Overpaid</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Bell Price</span>
-                <span class="value-amount">5M</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Fruit Type</span>
-                <span class="value-amount">Beast</span>
-              </div>
+            <div class="value-item">
+              <span class="value-label">Copy Value</span>
+              <button class="copy-btn" data-value="1.325B">Copy</button>
             </div>
           </div>
         </div>
         
-        <h3 class="value-section-title">Special Companions</h3>
-        <div class="values-grid">
-          <!-- Special companions would go here -->
-          <div class="value-card">
-            <div class="value-card-header">
-              <div class="value-card-image">
-                <i class="fas fa-bolt"></i>
-              </div>
-              <h3 class="value-card-name">Turbo</h3>
+        <div class="value-card">
+          <div class="value-card-header">
+            <div class="value-card-image">
+              <i class="fas fa-dragon"></i>
             </div>
-            <div class="value-card-body">
-              <div class="value-item">
-                <span class="value-label">Normal</span>
-                <span class="value-amount">1.5K</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Gold</span>
-                <span class="value-amount">1.85K <span class="value-tag gold">GOLD</span></span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Atomic</span>
-                <span class="value-amount">2.1K <span class="value-tag atomic">ATOMIC</span></span>
-              </div>
+            <h3 class="value-card-name">Comp 2 <span class="rarity-tag rarity-legendary">Legendary</span></h3>
+          </div>
+          <div class="value-card-body">
+            <div class="value-item">
+              <span class="value-label">Regular</span>
+              <span class="value-amount">1.06B</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Demand</span>
+              <span class="value-amount">10/10</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Trend</span>
+              <span class="value-amount">Overpaid</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Good For</span>
+              <span class="value-amount">Training, PVP</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Bell Price</span>
+              <span class="value-amount">15M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Fruit Type</span>
+              <span class="value-amount">Beast</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Copy Value</span>
+              <button class="copy-btn" data-value="1.06B">Copy</button>
             </div>
           </div>
-          
-          <div class="value-card">
-            <div class="value-card-header">
-              <div class="value-card-image">
-                <i class="fas fa-water"></i>
-              </div>
-              <h3 class="value-card-name">Seidon</h3>
-            </div>
-            <div class="value-card-body">
-              <div class="value-item">
-                <span class="value-label">Normal</span>
-                <span class="value-amount">500</span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Gold</span>
-                <span class="value-amount">650 <span class="value-tag gold">GOLD</span></span>
-              </div>
-              <div class="value-item">
-                <span class="value-label">Atomic</span>
-                <span class="value-amount">750 <span class="value-tag atomic">ATOMIC</span></span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Add more special companions as needed -->
         </div>
-        <div class="calculator-subtitle" style="margin-top: 2rem; text-align: center;">
-          <p>Values last updated: about 18 hours ago</p>
-          <p>Special thanks to Harry the Tester for these values!</p>
+        
+        <div class="value-card">
+          <div class="value-card-header">
+            <div class="value-card-image">
+              <i class="fas fa-dragon"></i>
+            </div>
+            <h3 class="value-card-name">Comp 3 <span class="rarity-tag rarity-epic">Epic</span></h3>
+          </div>
+          <div class="value-card-body">
+            <div class="value-item">
+              <span class="value-label">Regular</span>
+              <span class="value-amount">265M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Permanent</span>
+              <span class="value-amount">265M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Demand</span>
+              <span class="value-amount">10/10</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Trend</span>
+              <span class="value-amount">Overpaid</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Good For</span>
+              <span class="value-amount">Training</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Bell Price</span>
+              <span class="value-amount">8M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Fruit Type</span>
+              <span class="value-amount">Beast</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Copy Value</span>
+              <button class="copy-btn" data-value="265M">Copy</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-card-header">
+            <div class="value-card-image">
+              <i class="fas fa-snowflake"></i>
+            </div>
+            <h3 class="value-card-name">Comp 4 <span class="rarity-tag rarity-rare">Rare</span></h3>
+          </div>
+          <div class="value-card-body">
+            <div class="value-item">
+              <span class="value-label">Regular</span>
+              <span class="value-amount">140M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Permanent</span>
+              <span class="value-amount">140M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Demand</span>
+              <span class="value-amount">10/10</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Trend</span>
+              <span class="value-amount">Overpaid</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Good For</span>
+              <span class="value-amount">Training</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Bell Price</span>
+              <span class="value-amount">5M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Fruit Type</span>
+              <span class="value-amount">Beast</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Copy Value</span>
+              <button class="copy-btn" data-value="140M">Copy</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-card-header">
+            <div class="value-card-image">
+              <i class="fas fa-fire"></i>
+            </div>
+            <h3 class="value-card-name">Comp 5 <span class="rarity-tag rarity-uncommon">Uncommon</span></h3>
+          </div>
+          <div class="value-card-body">
+            <div class="value-item">
+              <span class="value-label">Regular</span>
+              <span class="value-amount">75M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Permanent</span>
+              <span class="value-amount">75M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Demand</span>
+              <span class="value-amount">9/10</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Trend</span>
+              <span class="value-amount">Stable</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Good For</span>
+              <span class="value-amount">PVP</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Bell Price</span>
+              <span class="value-amount">3.2M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Fruit Type</span>
+              <span class="value-amount">Elemental</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Copy Value</span>
+              <button class="copy-btn" data-value="75M">Copy</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-card-header">
+            <div class="value-card-image">
+              <i class="fas fa-cat"></i>
+            </div>
+            <h3 class="value-card-name">Comp 6 <span class="rarity-tag rarity-common">Common</span></h3>
+          </div>
+          <div class="value-card-body">
+            <div class="value-item">
+              <span class="value-label">Regular</span>
+              <span class="value-amount">55M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Permanent</span>
+              <span class="value-amount">55M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Demand</span>
+              <span class="value-amount">10/10</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Trend</span>
+              <span class="value-amount">Overpaid</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Good For</span>
+              <span class="value-amount">Training</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Bell Price</span>
+              <span class="value-amount">5M</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Fruit Type</span>
+              <span class="value-amount">Beast</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Copy Value</span>
+              <button class="copy-btn" data-value="55M">Copy</button>
+            </div>
+          </div>
         </div>
       </div>
+      
+      <h3 class="value-section-title">Special Companions</h3>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-card-header">
+            <div class="value-card-image">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3 class="value-card-name">Comp 7 <span class="rarity-tag rarity-exclusive">Exclusive</span></h3>
+          </div>
+          <div class="value-card-body">
+            <div class="value-item">
+              <span class="value-label">Normal</span>
+              <span class="value-amount">1.5K</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Gold</span>
+              <span class="value-amount">1.85K <span class="value-tag gold">GOLD</span></span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Atomic</span>
+              <span class="value-amount">2.1K <span class="value-tag atomic">ATOMIC</span></span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Demand</span>
+              <span class="value-amount">8/10</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Trend</span>
+              <span class="value-amount">Stable</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Good For</span>
+              <span class="value-amount">Speed</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Copy Value</span>
+              <button class="copy-btn" data-value="1.5K">Copy</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-card-header">
+            <div class="value-card-image">
+              <i class="fas fa-water"></i>
+            </div>
+            <h3 class="value-card-name">Comp 8 <span class="rarity-tag rarity-secret">Secret</span></h3>
+          </div>
+          <div class="value-card-body">
+            <div class="value-item">
+              <span class="value-label">Normal</span>
+              <span class="value-amount">500</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Gold</span>
+              <span class="value-amount">650 <span class="value-tag gold">GOLD</span></span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Atomic</span>
+              <span class="value-amount">750 <span class="value-tag atomic">ATOMIC</span></span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Demand</span>
+              <span class="value-amount">7/10</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Trend</span>
+              <span class="value-amount">Rising</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Good For</span>
+              <span class="value-amount">Swimming</span>
+            </div>
+            <div class="value-item">
+              <span class="value-label">Copy Value</span>
+              <button class="copy-btn" data-value="500">Copy</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Add more special companions as needed -->
+      </div>
+      <div class="calculator-subtitle" style="margin-top: 2rem; text-align: center;">
+        <p>Values last updated: about 18 hours ago</p>
+        <p>Special thanks to Harry the Tester for these values!</p>
+      </div>
+    </div>
     </div>
   </div>
 
