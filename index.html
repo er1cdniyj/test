@@ -1164,226 +1164,7 @@
             <span>Difference:</span>
             <span class="result-value" id="difference-value">0</span>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="modal" id="companion-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title">Select Companion</h2>
-        <button class="close-modal" id="close-modal">&times;</button>
-      </div>
-      <div class="companion-grid" id="companion-grid">
-        <!-- Companions will be added by JavaScript -->
-      </div>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      
-      function createParticles() {
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = Math.floor(window.innerWidth / 15);
-        
-        for (let i = 0; i < particleCount; i++) {
-          const particle = document.createElement('div');
-          particle.classList.add('particle');
-          
-          const size = Math.random() * 4 + 1;
-          const posX = Math.random() * window.innerWidth;
-          const posY = Math.random() * window.innerHeight;
-          const duration = Math.random() * 30 + 20;
-          const delay = Math.random() * 5;
-          
-          particle.style.width = `${size}px`;
-          particle.style.height = `${size}px`;
-          particle.style.left = `${posX}px`;
-          particle.style.top = `${posY}px`;
-          particle.style.animationDuration = `${duration}s`;
-          particle.style.animationDelay = `${delay}s`;
-          
-          
-          const colors = ['var(--primary)', 'var(--secondary)', 'var(--accent)'];
-          particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-          
-          particlesContainer.appendChild(particle);
-        }
-      }
-      
-      createParticles();
-
-      
-      const tabButtons = document.querySelectorAll('.nav-btn');
-      const tabContents = document.querySelectorAll('.tab-content');
-      
-      tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          const tabId = button.getAttribute('data-tab');
-          
-          
-          tabButtons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
-          
-          
-          tabContents.forEach(content => content.classList.remove('active'));
-          document.getElementById(tabId).classList.add('active');
-        });
-      });
-
-      
-      const ticksPerMinute = {
-        strength: 55,
-        energy: 28,
-        defense: 36,
-        sword: 55
-      };
-      const companionTicksPerMinute = 10;
-
-      
-      const ranks = [
-        { name: "Rookie", coinPerMinute: 5 },
-        { name: "Ninja", coinPerMinute: 10 },
-        { name: "Pirate", coinPerMinute: 25 },
-        { name: "Ghoul", coinPerMinute: 50 },
-        { name: "Hero", coinPerMinute: 100 },
-        { name: "Reaper", coinPerMinute: 250 },
-        { name: "Warrior", coinPerMinute: 500 },
-        { name: "Sin", coinPerMinute: 1000 },
-        { name: "Mage", coinPerMinute: 5000 },
-        { name: "Demon", coinPerMinute: 10000 },
-        { name: "Emperor", coinPerMinute: 50000 },
-        { name: "Elder", coinPerMinute: 100000 },
-        { name: "Overlord", coinPerMinute: 500000 },
-        { name: "Leader", coinPerMinute: 1000000 },
-        { name: "Deity", coinPerMinute: 5000000 },
-        { name: "Sage", coinPerMinute: 10000000 },
-        { name: "Mask", coinPerMinute: 50000000 },
-        { name: "Shinigami", coinPerMinute: 100000000 },
-        { name: "Hashira", coinPerMinute: 500000000 },
-        { name: "Destroyer", coinPerMinute: 1000000000 },
-        { name: "Otsutsuki", coinPerMinute: 5000000000 },
-        { name: "Pirate King", coinPerMinute: 10000000000 }
-      ];
-
-      
-      function parseNumberWithSuffix(input) {
-        if (!input) return NaN;
-        if (/^[0-9.]+e[0-9]+$/i.test(input)) return parseFloat(input);
-        input = input.toString().trim().toLowerCase();
-        const suffixes = {
-          'k':1e3,'m':1e6,'b':1e9,'t':1e12,'qd':1e15,'qn':1e18,
-          'sx':1e21,'sp':1e24,'oc':1e27,'no':1e30,'dc':1e33
-        };
-        let suffix = '';
-        let numberPart = input;
-        for (const s in suffixes) {
-          if (input.endsWith(s)) {
-            suffix = s;
-            numberPart = input.substring(0, input.length - s.length);
-            break;
-          }
-        }
-        const number = parseFloat(numberPart);
-        return isNaN(number) ? NaN : suffix ? number * suffixes[suffix] : number;
-      }
-
-      function abbreviateNumber(num) {
-        const units = [
-          {v:1e33,s:"Dc"},{v:1e30,s:"No"},{v:1e27,s:"Oc"},{v:1e24,s:"Sp"},
-          {v:1e21,s:"Sx"},{v:1e18,s:"Qn"},{v:1e15,s:"Qd"},{v:1e12,s:"T"},
-          {v:1e9,s:"B"},{v:1e6,s:"M"},{v:1e3,s:"K"}
-        ];
-        for (const {v,s} of units) if (num >= v) return (num/v).toFixed(2)+s;
-        return num.toString();
-      }
-
-      function formatTime(minutes) {
-        if (minutes < 60) return `${minutes.toFixed(1)} minutes`;
-        const hours = minutes / 60;
-        if (hours < 24) return `${hours.toFixed(1)} hours`;
-        const days = hours / 24;
-        return `${days.toFixed(1)} days`;
-      }
-
-      
-      function calculateGains() {
-        const statType = document.getElementById("statType").value;
-        const gainPerTick = parseNumberWithSuffix(document.getElementById("gainPerTick").value);
-        const time = parseFloat(document.getElementById("time").value);
-        const hasCompanion = document.getElementById("companionActive").value === "true";
-        const companionGain = hasCompanion ? parseNumberWithSuffix(document.getElementById("companionGain").value) : 0;
-
-        if (isNaN(gainPerTick)) {
-          document.getElementById("result").innerHTML = `<div class="result-item" style="color:var(--error)">Please enter a valid gain per tick</div>`;
-          return;
-        }
-
-        if (isNaN(time) || time <= 0) {
-          document.getElementById("result").innerHTML = `<div class="result-item" style="color:var(--error)">Please enter a valid time</div>`;
-          return;
-        }
-
-        if (hasCompanion && isNaN(companionGain)) {
-          document.getElementById("result").innerHTML = `<div class="result-item" style="color:var(--error)">Please enter valid companion gains</div>`;
-          return;
-        }
-
-        const ticks = ticksPerMinute[statType] * time;
-        const mainGain = gainPerTick * ticks;
-        
-        let companionTotalGain = 0;
-        if (hasCompanion) {
-          const companionTicks = companionTicksPerMinute * time;
-          companionTotalGain = companionGain * companionTicks;
-        }
-
-        const totalGain = mainGain + companionTotalGain;
-
-        document.getElementById("result").innerHTML = `
-          <div class="result-item">
-            <span class="result-label">Training Type:</span>
-            <span class="result-value">${statType.charAt(0).toUpperCase()+statType.slice(1)}</span>
-          </div>
-          <div class="result-item">
-            <span class="result-label">Ticks Per Minute:</span>
-            <span class="result-value">${ticksPerMinute[statType]}</span>
-          </div>
-          <div class="result-item">
-            <span class="result-label">Total Ticks:</span>
-            <span class="result-value">${ticks}</span>
-          </div>
-          <div class="result-item">
-            <span class="result-label">Main Gain:</span>
-            <span class="result-value">${abbreviateNumber(mainGain)}</span>
-          </div>
-          ${hasCompanion ? `
-          <div class="result-item">
-            <span class="result-label">Companion Ticks:</span>
-            <span class="result-value">${companionTicksPerMinute * time}</span>
-          </div>
-          <div class="result-item">
-            <span class="result-label">Companion Gain:</span>
-            <span class="result-value">${abbreviateNumber(companionTotalGain)}</span>
-          </div>` : ''}
-          <div class="result-item" style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid var(--border)">
-            <span class="result-label" style="font-weight:700">Total Gain:</span>
-            <span class="result-value" style="font-weight:700">${abbreviateNumber(totalGain)}</span>
-          </div>
-          <div class="result-item">
-            <span class="result-label">Gain Per Minute:</span>
-            <span class="result-value">${abbreviateNumber(totalGain / time)}</span>
-          </div>
-          <div class="result-item">
-            <span class="result-label">Gain Per Hour:</span>
-            <span class="result-value">${abbreviateNumber(totalGain / time * 60)}</span>
-          </div>
-        `;
-      }
-      <div class="tab-content" id="values">
+        <div class="tab-content" id="values">
       <div class="values-container">
         <div class="values-header">
           <h2 class="values-title">Companion Values</h2>
@@ -1655,6 +1436,226 @@
       </div>
     </div>
   </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="modal" id="companion-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Select Companion</h2>
+        <button class="close-modal" id="close-modal">&times;</button>
+      </div>
+      <div class="companion-grid" id="companion-grid">
+        <!-- Companions will be added by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = Math.floor(window.innerWidth / 15);
+        
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('div');
+          particle.classList.add('particle');
+          
+          const size = Math.random() * 4 + 1;
+          const posX = Math.random() * window.innerWidth;
+          const posY = Math.random() * window.innerHeight;
+          const duration = Math.random() * 30 + 20;
+          const delay = Math.random() * 5;
+          
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          particle.style.left = `${posX}px`;
+          particle.style.top = `${posY}px`;
+          particle.style.animationDuration = `${duration}s`;
+          particle.style.animationDelay = `${delay}s`;
+          
+          
+          const colors = ['var(--primary)', 'var(--secondary)', 'var(--accent)'];
+          particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+          
+          particlesContainer.appendChild(particle);
+        }
+      }
+      
+      createParticles();
+
+      
+      const tabButtons = document.querySelectorAll('.nav-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const tabId = button.getAttribute('data-tab');
+          
+          
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          
+          tabContents.forEach(content => content.classList.remove('active'));
+          document.getElementById(tabId).classList.add('active');
+        });
+      });
+
+      
+      const ticksPerMinute = {
+        strength: 55,
+        energy: 28,
+        defense: 36,
+        sword: 55
+      };
+      const companionTicksPerMinute = 10;
+
+      
+      const ranks = [
+        { name: "Rookie", coinPerMinute: 5 },
+        { name: "Ninja", coinPerMinute: 10 },
+        { name: "Pirate", coinPerMinute: 25 },
+        { name: "Ghoul", coinPerMinute: 50 },
+        { name: "Hero", coinPerMinute: 100 },
+        { name: "Reaper", coinPerMinute: 250 },
+        { name: "Warrior", coinPerMinute: 500 },
+        { name: "Sin", coinPerMinute: 1000 },
+        { name: "Mage", coinPerMinute: 5000 },
+        { name: "Demon", coinPerMinute: 10000 },
+        { name: "Emperor", coinPerMinute: 50000 },
+        { name: "Elder", coinPerMinute: 100000 },
+        { name: "Overlord", coinPerMinute: 500000 },
+        { name: "Leader", coinPerMinute: 1000000 },
+        { name: "Deity", coinPerMinute: 5000000 },
+        { name: "Sage", coinPerMinute: 10000000 },
+        { name: "Mask", coinPerMinute: 50000000 },
+        { name: "Shinigami", coinPerMinute: 100000000 },
+        { name: "Hashira", coinPerMinute: 500000000 },
+        { name: "Destroyer", coinPerMinute: 1000000000 },
+        { name: "Otsutsuki", coinPerMinute: 5000000000 },
+        { name: "Pirate King", coinPerMinute: 10000000000 }
+      ];
+
+      
+      function parseNumberWithSuffix(input) {
+        if (!input) return NaN;
+        if (/^[0-9.]+e[0-9]+$/i.test(input)) return parseFloat(input);
+        input = input.toString().trim().toLowerCase();
+        const suffixes = {
+          'k':1e3,'m':1e6,'b':1e9,'t':1e12,'qd':1e15,'qn':1e18,
+          'sx':1e21,'sp':1e24,'oc':1e27,'no':1e30,'dc':1e33
+        };
+        let suffix = '';
+        let numberPart = input;
+        for (const s in suffixes) {
+          if (input.endsWith(s)) {
+            suffix = s;
+            numberPart = input.substring(0, input.length - s.length);
+            break;
+          }
+        }
+        const number = parseFloat(numberPart);
+        return isNaN(number) ? NaN : suffix ? number * suffixes[suffix] : number;
+      }
+
+      function abbreviateNumber(num) {
+        const units = [
+          {v:1e33,s:"Dc"},{v:1e30,s:"No"},{v:1e27,s:"Oc"},{v:1e24,s:"Sp"},
+          {v:1e21,s:"Sx"},{v:1e18,s:"Qn"},{v:1e15,s:"Qd"},{v:1e12,s:"T"},
+          {v:1e9,s:"B"},{v:1e6,s:"M"},{v:1e3,s:"K"}
+        ];
+        for (const {v,s} of units) if (num >= v) return (num/v).toFixed(2)+s;
+        return num.toString();
+      }
+
+      function formatTime(minutes) {
+        if (minutes < 60) return `${minutes.toFixed(1)} minutes`;
+        const hours = minutes / 60;
+        if (hours < 24) return `${hours.toFixed(1)} hours`;
+        const days = hours / 24;
+        return `${days.toFixed(1)} days`;
+      }
+
+      
+      function calculateGains() {
+        const statType = document.getElementById("statType").value;
+        const gainPerTick = parseNumberWithSuffix(document.getElementById("gainPerTick").value);
+        const time = parseFloat(document.getElementById("time").value);
+        const hasCompanion = document.getElementById("companionActive").value === "true";
+        const companionGain = hasCompanion ? parseNumberWithSuffix(document.getElementById("companionGain").value) : 0;
+
+        if (isNaN(gainPerTick)) {
+          document.getElementById("result").innerHTML = `<div class="result-item" style="color:var(--error)">Please enter a valid gain per tick</div>`;
+          return;
+        }
+
+        if (isNaN(time) || time <= 0) {
+          document.getElementById("result").innerHTML = `<div class="result-item" style="color:var(--error)">Please enter a valid time</div>`;
+          return;
+        }
+
+        if (hasCompanion && isNaN(companionGain)) {
+          document.getElementById("result").innerHTML = `<div class="result-item" style="color:var(--error)">Please enter valid companion gains</div>`;
+          return;
+        }
+
+        const ticks = ticksPerMinute[statType] * time;
+        const mainGain = gainPerTick * ticks;
+        
+        let companionTotalGain = 0;
+        if (hasCompanion) {
+          const companionTicks = companionTicksPerMinute * time;
+          companionTotalGain = companionGain * companionTicks;
+        }
+
+        const totalGain = mainGain + companionTotalGain;
+
+        document.getElementById("result").innerHTML = `
+          <div class="result-item">
+            <span class="result-label">Training Type:</span>
+            <span class="result-value">${statType.charAt(0).toUpperCase()+statType.slice(1)}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Ticks Per Minute:</span>
+            <span class="result-value">${ticksPerMinute[statType]}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Total Ticks:</span>
+            <span class="result-value">${ticks}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Main Gain:</span>
+            <span class="result-value">${abbreviateNumber(mainGain)}</span>
+          </div>
+          ${hasCompanion ? `
+          <div class="result-item">
+            <span class="result-label">Companion Ticks:</span>
+            <span class="result-value">${companionTicksPerMinute * time}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Companion Gain:</span>
+            <span class="result-value">${abbreviateNumber(companionTotalGain)}</span>
+          </div>` : ''}
+          <div class="result-item" style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid var(--border)">
+            <span class="result-label" style="font-weight:700">Total Gain:</span>
+            <span class="result-value" style="font-weight:700">${abbreviateNumber(totalGain)}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Gain Per Minute:</span>
+            <span class="result-value">${abbreviateNumber(totalGain / time)}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Gain Per Hour:</span>
+            <span class="result-value">${abbreviateNumber(totalGain / time * 60)}</span>
+          </div>
+        `;
+      }
+      
 
       
       function calculateCoins() {
