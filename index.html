@@ -868,6 +868,86 @@
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.3);
     }
+    /* FAQ Styles */
+.faq-container {
+  width: 100%;
+}
+
+.faq-category {
+  margin-bottom: 2rem;
+}
+
+.faq-category-title {
+  font-size: 1.2rem;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-item {
+  background: var(--bg-element);
+  border-radius: 0.6rem;
+  margin-bottom: 0.8rem;
+  overflow: hidden;
+}
+
+.faq-question {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.faq-question:hover {
+  background: rgba(126, 34, 206, 0.1);
+}
+
+.faq-question i {
+  transition: transform 0.3s ease;
+}
+
+.faq-answer {
+  padding: 0 1rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  background: rgba(37, 37, 66, 0.5);
+}
+
+.faq-item.active .faq-answer {
+  max-height: 500px;
+  padding: 1rem;
+}
+
+.faq-item.active .faq-question i {
+  transform: rotate(45deg);
+}
+
+.search-box {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.6rem;
+  background: var(--bg-element);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  font-family: 'Oxanium', sans-serif;
+  font-size: 0.9rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.3);
+}
   </style>
 </head>
 <body>
@@ -902,6 +982,9 @@
       <button class="nav-btn" data-tab="values-tab">
         <i class="fas fa-list-alt"></i> Values
       </button>
+      <button class="nav-btn" data-tab="faq-tab">
+  <i class="fas fa-question-circle"></i> FAQ
+</button>
     </div>
   </div>
 
@@ -1192,6 +1275,20 @@
       </div>
     </div>
   </div>
+  <div class="tab-content" id="faq-tab">
+  <div class="calculator-container">
+    <h2 class="calculator-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+    <p class="calculator-subtitle">Find answers to common questions about using the calculators</p>
+
+    <div class="search-box">
+      <input type="text" id="faq-search" class="search-input" placeholder="Search questions...">
+    </div>
+
+    <div class="faq-container">
+      <!-- FAQ content will be populated by JavaScript -->
+    </div>
+  </div>
+</div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -1845,6 +1942,212 @@
           image: "prodigy.png" 
         },
       ];
+      // FAQ Data
+const faqData = [
+  {
+    category: "General Questions",
+    questions: [
+      {
+        question: "What is this website for?",
+        answer: "This website provides calculators for the Anime Simulator game, helping players calculate stats gains, coin earnings, goal tracking, and companion trading values."
+      },
+      {
+        question: "Who created these calculators?",
+        answer: "These calculators were created by babatunde2289 to help the Anime Simulator community."
+      },
+      {
+        question: "Are these calculators official?",
+        answer: "No, these are fan-made tools and are not officially affiliated with the game developers."
+      }
+    ]
+  },
+  {
+    category: "Stats Calculator",
+    questions: [
+      {
+        question: "How do I calculate my training gains?",
+        answer: "Enter your gain per tick, training time, and companion details (if applicable) and click 'Calculate Gains' to see your estimated stats gains."
+      },
+      {
+        question: "What format should I use for gain values?",
+        answer: "You can use either standard notation (e.g., 1.5sx) or scientific notation (e.g., 1e21)."
+      },
+      {
+        question: "What are the different tick rates for each stat?",
+        answer: "Strength and Sword have 55 ticks/minute, Energy has 28 ticks/minute, and Defense has 36 ticks/minute."
+      }
+    ]
+  },
+  {
+    category: "Coin Calculator",
+    questions: [
+      {
+        question: "How does the coin calculator work?",
+        answer: "Select your rank, enter the time you'll be earning coins, and toggle any bonuses you have active to calculate your estimated coin earnings."
+      },
+      {
+        question: "What bonuses affect coin earnings?",
+        answer: "The 2x Coins Gamepass and Gold Companion (+20%) are the main bonuses that affect coin earnings."
+      }
+    ]
+  },
+  {
+    category: "Goal Calculator",
+    questions: [
+      {
+        question: "How do I calculate the time needed to reach a goal?",
+        answer: "Enter your current stats, desired stats, gain rates, and the calculator will estimate how long it will take to reach your goal."
+      },
+      {
+        question: "Can I save my goal calculations?",
+        answer: "Yes, use the profile system to save and load your goal calculations for future reference."
+      }
+    ]
+  },
+  {
+    category: "Trading Calculator",
+    questions: [
+      {
+        question: "How accurate are the companion values?",
+        answer: "The values are based on community data (special thanks to Harry the Tester) but may vary. Trading is always at your own risk."
+      },
+      {
+        question: "What are traits (Normal, Gold, Atomic)?",
+        answer: "These represent different rarities or versions of companions, each with different values. Click the tag icon on a companion to set its trait."
+      },
+      {
+        question: "How do I add companions to a trade?",
+        answer: "Click the 'Add Companion' button in either the 'Your Offer' or 'Their Offer' section, then select from the available companions."
+      }
+    ]
+  },
+  {
+    category: "Values Tab",
+    questions: [
+      {
+        question: "What's the difference between companions and auras?",
+        answer: "Companions are assist characters that provide various benefits, while auras are special effects that provide stat boosts or other advantages."
+      },
+      {
+        question: "Why do some companions have multiple values?",
+        answer: "Some companions have different versions (Normal, Gold, Atomic) with different values based on their rarity and effects."
+      }
+    ]
+  },
+  {
+    category: "Technical Questions",
+    questions: [
+      {
+        question: "Is my data saved?",
+        answer: "Your profile data is saved locally in your browser's storage, but it's not backed up to any server."
+      },
+      {
+        question: "Can I use this on mobile?",
+        answer: "Yes, the calculators are responsive and should work on mobile devices, though the experience may be better on desktop."
+      },
+      {
+        question: "How often are the values updated?",
+        answer: "The values are updated periodically as new information becomes available from the game community."
+      }
+    ]
+  },
+  {
+    category: "Safety & Trading",
+    questions: [
+      {
+        question: "Is trading safe?",
+        answer: "Trading always carries some risk. Never share your account information and be cautious when trading high-value items."
+      },
+      {
+        question: "What should I do if I get scammed?",
+        answer: "Unfortunately, developers typically don't restore lost items from trades. Be extra careful and double-check all trade values before accepting."
+      },
+      {
+        question: "Should I contact developers or testers if I get scammed?",
+        answer: "No, as mentioned on the site, you should not DM developers or testers for help with scams as they typically cannot assist with trade disputes."
+      }
+    ]
+  }
+];
+
+// Function to populate FAQ
+function populateFAQ() {
+  const faqContainer = document.getElementById('faq-container');
+  faqContainer.innerHTML = '';
+  
+  faqData.forEach(category => {
+    const categoryElement = document.createElement('div');
+    categoryElement.classList.add('faq-category');
+    
+    const categoryTitle = document.createElement('h3');
+    categoryTitle.classList.add('faq-category-title');
+    categoryTitle.textContent = category.category;
+    categoryElement.appendChild(categoryTitle);
+    
+    category.questions.forEach((item, index) => {
+      const faqItem = document.createElement('div');
+      faqItem.classList.add('faq-item');
+      
+      const questionDiv = document.createElement('div');
+      questionDiv.classList.add('faq-question');
+      questionDiv.innerHTML = `
+        <span>${item.question}</span>
+        <i class="fas fa-plus"></i>
+      `;
+      
+      const answerDiv = document.createElement('div');
+      answerDiv.classList.add('faq-answer');
+      answerDiv.innerHTML = `<p>${item.answer}</p>`;
+      
+      questionDiv.addEventListener('click', () => {
+        faqItem.classList.toggle('active');
+      });
+      
+      faqItem.appendChild(questionDiv);
+      faqItem.appendChild(answerDiv);
+      categoryElement.appendChild(faqItem);
+    });
+    
+    faqContainer.appendChild(categoryElement);
+  });
+}
+
+// Search functionality for FAQ
+function setupFAQSearch() {
+  const searchInput = document.getElementById('faq-search');
+  searchInput.addEventListener('input', () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question').textContent.toLowerCase();
+      const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+      
+      if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+        item.style.display = 'block';
+        // Expand matching items
+        if (searchTerm && !item.classList.contains('active')) {
+          item.classList.add('active');
+        }
+      } else {
+        item.style.display = 'none';
+      }
+    });
+    
+    // Show/hide category titles based on visible items
+    document.querySelectorAll('.faq-category').forEach(category => {
+      const visibleItems = category.querySelectorAll('.faq-item[style="display: block"]');
+      category.style.display = visibleItems.length ? 'block' : 'none';
+    });
+  });
+}
+
+// Initialize FAQ when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // Add this with your other initialization code
+  populateFAQ();
+  setupFAQSearch();
+});
 
      
       let currentPanel = null; 
@@ -2179,6 +2482,22 @@
           });
         });
       }
+      const tabButtons = document.querySelectorAll('.nav-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const tabId = button.getAttribute('data-tab');
+    
+    // Update active button
+    tabButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+    
+    // Show active tab
+    tabContents.forEach(content => content.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+  });
+});
 
      
       populateCompanionGrid();
