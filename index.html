@@ -9,12 +9,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #7e22ce;
-      --primary-glow: #c084fc;
-      --secondary: #06b6d4;
-      --secondary-glow: #22d3ee;
-      --accent: #f97316;
-      --accent-glow: #fdba74;
+      --primary: #FFD700; /* Yellow */
+      --primary-glow: #FFEA80;
+      --secondary: #87CEEB; /* Light Blue */
+      --secondary-glow: #B0E2FF;
+      --accent: #FF69B4; /* Pink */
+      --accent-glow: #FFB6C1;
       --bg-dark: #0f0f19;
       --bg-card: rgba(26, 26, 46, 0.8);
       --bg-element: rgba(37, 37, 66, 0.6);
@@ -25,9 +25,9 @@
       --error: #ef4444;
       --gold: #FFD700;
       --atomic: #50C878;
-      --neon-pink: #ff2d95;
+      --neon-yellow: #FFEA00;
       --neon-blue: #00ccff;
-      --neon-purple: #bf00ff;
+      --neon-pink: #ff2d95;
     }
     
     * {
@@ -59,9 +59,9 @@
       z-index: -3;
       opacity: 0.15;
       background: 
-        radial-gradient(circle at 10% 20%, rgba(126, 34, 206, 0.4) 0%, transparent 20%),
-        radial-gradient(circle at 90% 70%, rgba(6, 182, 212, 0.4) 0%, transparent 20%),
-        radial-gradient(circle at 50% 30%, rgba(249, 115, 22, 0.3) 0%, transparent 30%);
+        radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.4) 0%, transparent 20%),
+        radial-gradient(circle at 90% 70%, rgba(135, 206, 235, 0.4) 0%, transparent 20%),
+        radial-gradient(circle at 50% 30%, rgba(255, 105, 180, 0.3) 0%, transparent 30%);
       animation: pulseBackground 15s ease infinite;
     }
     
@@ -82,7 +82,6 @@
     
     .particle {
       position: absolute;
-      background: var(--primary);
       border-radius: 50%;
       opacity: 0.15;
       animation: float linear infinite;
@@ -101,8 +100,8 @@
       height: 100%;
       z-index: -1;
       background-image: 
-        linear-gradient(rgba(126, 34, 206, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(126, 34, 206, 0.1) 1px, transparent 1px);
+        linear-gradient(rgba(255, 215, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 215, 0, 0.1) 1px, transparent 1px);
       background-size: 50px 50px;
       perspective: 1000px;
       transform-style: preserve-3d;
@@ -136,7 +135,7 @@
     .logo {
       width: 60px;
       height: 60px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: linear-gradient(135deg, var(--primary), var(--accent));
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -150,7 +149,7 @@
     
     @keyframes logoPulse {
       0%, 100% { transform: scale(1); box-shadow: 0 0 25px var(--primary-glow); }
-      50% { transform: scale(1.05); box-shadow: 0 0 35px var(--secondary-glow); }
+      50% { transform: scale(1.05); box-shadow: 0 0 35px var(--accent-glow); }
     }
     
     .logo::before {
@@ -181,14 +180,14 @@
       background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 15px rgba(126, 34, 206, 0.5);
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
       position: relative;
       animation: titleGlow 2s ease-in-out infinite alternate;
     }
     
     @keyframes titleGlow {
-      from { text-shadow: 0 0 15px rgba(126, 34, 206, 0.5); }
-      to { text-shadow: 0 0 25px rgba(6, 182, 212, 0.7), 0 0 35px rgba(126, 34, 206, 0.6); }
+      from { text-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+      to { text-shadow: 0 0 25px rgba(135, 206, 235, 0.7), 0 0 35px rgba(255, 105, 180, 0.6); }
     }
     
     .subtitle {
@@ -255,7 +254,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: linear-gradient(135deg, var(--primary), var(--accent));
       opacity: 0;
       z-index: -1;
       transition: opacity 0.3s ease;
@@ -263,7 +262,7 @@
     
     .nav-btn.active {
       color: white;
-      box-shadow: 0 0 15px rgba(126, 34, 206, 0.5);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
     }
     
     .nav-btn.active::before {
@@ -290,7 +289,7 @@
       text-align: center;
       font-size: 2rem;
       margin-bottom: 2rem;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -343,13 +342,13 @@
     
     .hub-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(126, 34, 206, 0.4);
+      box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
     }
     
     .card-icon {
       width: 80px;
       height: 80px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: linear-gradient(135deg, var(--primary), var(--accent));
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -374,7 +373,7 @@
     
     .card-button {
       padding: 0.8rem 1.5rem;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: linear-gradient(135deg, var(--primary), var(--accent));
       color: white;
       border: none;
       border-radius: 0.75rem;
@@ -389,7 +388,7 @@
     
     .card-button:hover {
       transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4);
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
     }
     
     /* Main content */
@@ -410,8 +409,8 @@
       border-radius: 1.5rem;
       box-shadow: 
         0 10px 30px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(126, 34, 206, 0.3),
-        0 0 20px rgba(126, 34, 206, 0.2);
+        0 0 0 1px rgba(255, 215, 0, 0.3),
+        0 0 20px rgba(255, 215, 0, 0.2);
       border: 1px solid var(--border);
       position: relative;
       overflow: hidden;
@@ -422,8 +421,8 @@
     }
     
     @keyframes containerGlow {
-      from { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(126, 34, 206, 0.3), 0 0 20px rgba(126, 34, 206, 0.2); }
-      to { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(126, 34, 206, 0.5), 0 0 30px rgba(126, 34, 206, 0.4); }
+      from { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 215, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.2); }
+      to { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 215, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.4); }
     }
     
     .calculator-container::before {
@@ -445,7 +444,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      text-shadow: 0 0 10px rgba(126, 34, 206, 0.5);
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
     }
     
     .calculator-subtitle {
@@ -498,7 +497,7 @@
     .form-input:focus, .form-select:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.3);
+      box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
       transform: translateY(-2px);
     }
     
@@ -549,7 +548,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(45deg, transparent, rgba(126, 34, 206, 0.1), transparent);
+      background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
       transform: translateX(-100%);
       animation: sectionShine 5s ease-in-out infinite;
     }
@@ -570,7 +569,7 @@
     
     /* Button enhancements with neon effects */
     .btn {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: linear-gradient(135deg, var(--primary), var(--accent));
       color: white;
       font-size: 1rem;
       font-weight: 700;
@@ -588,7 +587,7 @@
       position: relative;
       overflow: hidden;
       z-index: 1;
-      box-shadow: 0 5px 15px rgba(6, 182, 212, 0.3);
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
     }
     
     .btn::before {
@@ -598,7 +597,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      background: linear-gradient(135deg, var(--accent), var(--primary));
       opacity: 0;
       z-index: -1;
       transition: opacity 0.3s ease;
@@ -606,7 +605,7 @@
     
     .btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(6, 182, 212, 0.5);
+      box-shadow: 0 8px 25px rgba(255, 105, 180, 0.5);
     }
     
     .btn:hover::before {
@@ -696,7 +695,7 @@
     .result-value {
       font-weight: 700;
       color: var(--primary-glow);
-      text-shadow: 0 0 5px rgba(126, 34, 206, 0.3);
+      text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
     }
     
     /* Tooltip enhancements */
@@ -794,7 +793,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(45deg, transparent, rgba(126, 34, 206, 0.1), transparent);
+      background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
       transform: translateX(-100%);
       animation: panelShine 6s ease-in-out infinite;
     }
@@ -809,7 +808,7 @@
       margin-bottom: 1rem;
       color: var(--primary-glow);
       text-align: center;
-      text-shadow: 0 0 8px rgba(126, 34, 206, 0.4);
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
     }
     
     /* Tips and Guides Section */
@@ -854,7 +853,7 @@
     }
     
     .guide-tip {
-      background: rgba(6, 182, 212, 0.1);
+      background: rgba(135, 206, 235, 0.1);
       border-left: 4px solid var(--secondary);
       padding: 1rem;
       margin: 1rem 0;
@@ -1100,8 +1099,209 @@
       </div>
     </div>
 
-    <!-- Other calculator tabs (coin, goal, trade, values) would go here -->
-    <!-- For brevity, I've included only the stats calculator -->
+    <!-- Coin Calculator -->
+    <div class="tab-content" id="coin-calc">
+      <div class="calculator-container">
+        <h2 class="calculator-title"><i class="fas fa-coins"></i> Coin Calculator</h2>
+        <p class="calculator-subtitle">Calculate your coin earnings based on rank and bonuses</p>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="rankSelect" class="form-label">Select Rank</label>
+            <select id="rankSelect" class="form-select">
+              <option value="0">Rookie</option>
+              <option value="1">Ninja</option>
+              <option value="2">Pirate</option>
+              <option value="3">Ghoul</option>
+              <option value="4">Hero</option>
+              <option value="5">Reaper</option>
+              <option value="6">Warrior</option>
+              <option value="7">Sin</option>
+              <option value="8">Mage</option>
+              <option value="9">Demon</option>
+              <option value="10">Emperor</option>
+              <option value="11">Elder</option>
+              <option value="12">Overlord</option>
+              <option value="13">Leader</option>
+              <option value="14">Deity</option>
+              <option value="15">Sage</option>
+              <option value="16">Mask</option>
+              <option value="17">Shinigami</option>
+              <option value="18">Hashira</option>
+              <option value="19">Destroyer</option>
+              <option value="20">Otsutsuki</option>
+              <option value="21">Pirate King</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="coinTimeInput" class="form-label">Time (minutes)
+              <div class="tooltip">?<span class="tooltiptext">Duration of coin earning in minutes</span></div>
+            </label>
+            <input type="number" id="coinTimeInput" class="form-input" placeholder="e.g. 60" required>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3 class="section-title"><i class="fas fa-gem"></i> Bonuses</h3>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="doubleCoins" class="checkbox-input">
+              2x Coins Gamepass
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="goldCompanion" class="checkbox-input">
+              Gold Companion (+20%)
+            </label>
+          </div>
+        </div>
+
+        <button class="btn" id="calculateCoinsBtn"><i class="fas fa-coins"></i> Calculate Earnings</button>
+        
+        <div class="result" id="coinResult"></div>
+      </div>
+    </div>
+
+    <!-- Goal Calculator -->
+    <div class="tab-content" id="goal-calc">
+      <div class="calculator-container">
+        <h2 class="calculator-title"><i class="fas fa-bullseye"></i> Goal Calculator</h2>
+        <p class="calculator-subtitle">Calculate time to reach your target</p>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="goalStatType" class="form-label">Training Type
+              <div class="tooltip">?<span class="tooltiptext">Select the stat you're training (Strength, Energy, Defense, or Sword)</span></div>
+            </label>
+            <select id="goalStatType" class="form-select">
+              <option value="strength">Strength</option>
+              <option value="energy">Energy</option>
+              <option value="defense">Defense</option>
+              <option value="sword">Sword</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="goalGainPerTick" class="form-label">Your Gain Per Tick
+              <div class="tooltip">?<span class="tooltiptext">Amount you gain each training tick (e.g. 1.5sx or 1e21)</span></div>
+            </label>
+            <input type="text" id="goalGainPerTick" class="form-input" placeholder="e.g. 1.5sx or 1e21">
+          </div>
+          <div class="form-group">
+            <label for="goalCompanionGain" class="form-label">Companion Gain Per Tick
+              <div class="tooltip">?<span class="tooltiptext">Amount your companion gives per tick (e.g. 1.5qd or 1e15)</span></div>
+            </label>
+            <input type="text" id="goalCompanionGain" class="form-input" placeholder="e.g. 1.5qd or 1e15">
+          </div>
+          <div class="form-group">
+            <label for="currentStat" class="form-label">Current Stat Value
+              <div class="tooltip">?<span class="tooltiptext">Your current stat value (e.g. 1.5sx or 1e21)</span></div>
+            </label>
+            <input type="text" id="currentStat" class="form-input" placeholder="e.g. 1.5sx or 1e21">
+          </div>
+          <div class="form-group">
+            <label for="desiredStat" class="form-label">Desired Stat Value
+              <div class="tooltip">?<span class="tooltiptext">Your target stat value (e.g. 2.5sx or 2.5e21)</span></div>
+            </label>
+            <input type="text" id="desiredStat" class="form-input" placeholder="e.g. 2.5sx or 2.5e21">
+          </div>
+        </div>
+
+        <div class="profile-controls">
+          <input type="text" id="goalProfileName" class="profile-input" placeholder="Profile name">
+          <button class="profile-btn" id="saveGoalProfileBtn"><i class="fas fa-save"></i> Save</button>
+          <button class="profile-btn" id="loadGoalProfileBtn"><i class="fas fa-folder-open"></i> Load</button>
+        </div>
+
+        <button class="btn" id="calculateGoalBtn"><i class="fas fa-bullseye"></i> Calculate Time Needed</button>
+        
+        <div class="result" id="goalResult"></div>
+      </div>
+    </div>
+
+    <!-- Trading Calculator -->
+    <div class="tab-content" id="trade-calc">
+      <div class="calculator-container">
+        <h2 class="calculator-title"><i class="fas fa-exchange-alt"></i> Companion Trading Calculator</h2>
+        <p class="calculator-subtitle">Calculate the value of your companion trades</p>
+        <p class="calculator-subtitle" style="color: var(--accent);"><b>Special thanks to Harry, BruceWaynie, War, Svfe09 and Fantom for their help with values!</b></p>
+        <p class="calculator-subtitle" style="color: var(--error);"><b>Trading is at your own risk! Do not DM devs or Testers help for scams</b></p>
+
+        <div class="trade-container">
+          <div class="trade-panel">
+            <h2 class="panel-title">Your Offer</h2>
+            <div class="add-companion-btn" id="add-your-companion">
+              <i class="fas fa-plus-circle"></i>
+              <span>Add Companion</span>
+            </div>
+            <div class="selected-companions" id="your-offer"></div>
+          </div>
+
+          <div class="trade-panel">
+            <h2 class="panel-title">Their Offer</h2>
+            <div class="add-companion-btn" id="add-their-companion">
+              <i class="fas fa-plus-circle"></i>
+              <span>Add Companion</span>
+            </div>
+            <div class="selected-companions" id="their-offer"></div>
+          </div>
+        </div>
+
+        <button class="btn" id="calculate-trade"><i class="fas fa-calculator"></i> Calculate Trade</button>
+        
+        <div class="result" id="trade-result">
+          <div class="result-item">
+            <span>Your Offer Value:</span>
+            <span class="result-value" id="your-value">0</span>
+          </div>
+          <div class="result-item">
+            <span>Their Offer Value:</span>
+            <span class="result-value" id="their-value">0</span>
+          </div>
+          <div class="result-item" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+            <span style="font-weight: 700;">Trade Result:</span>
+            <span class="result-value" style="font-weight: 700;" id="trade-result-text">Fair Trade</span>
+          </div>
+          <div class="result-item">
+            <span>Difference:</span>
+            <span class="result-value" id="difference-value">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Values Tab -->
+    <div class="tab-content" id="values-tab">
+      <div class="calculator-container">
+        <h2 class="calculator-title"><i class="fas fa-list-alt"></i> Companion & Aura Values</h2>
+        <p class="calculator-subtitle">Reference values for trading companions and auras</p>
+        <p class="calculator-subtitle" style="color: var(--gold); margin-top: 0.5rem;">
+          <i class="fas fa-exclamation-triangle"></i> Values are approximate and may change over time
+        </p>
+
+        <div class="search-box">
+          <input type="text" id="values-search" class="search-input" placeholder="Search companions and auras...">
+        </div>
+
+        <div class="values-container">
+          <div class="values-section">
+            <h3 class="values-section-title">
+              <i class="fas fa-robot"></i> Companions
+            </h3>
+            <div class="values-grid" id="companions-values">
+              <!-- Companion values will be populated here -->
+            </div>
+          </div>
+
+          <div class="values-section">
+            <h3 class="values-section-title">
+              <i class="fas fa-certificate"></i> Auras
+            </h3>
+            <div class="values-grid" id="auras-values">
+              <!-- Aura values will be populated here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <!-- Guides Tab -->
     <div class="tab-content" id="guides-tab">
@@ -1184,264 +1384,10 @@
     <p>Made by babatunde2289 • Community Discord: <a href="https://discord.gg/Xjw2Yd5WYn">https://discord.gg/Xjw2Yd5WYn</a></p>
     <p>Special thanks to Harry, BruceWaynie, War, Svfe09 and Fantom for their help with values!</p>
   </div>
-<div class="section">
-          <h3 class="section-title"><i class="fas fa-robot"></i> Companion Settings</h3>
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="companionActive" class="form-label">Companion Active
-                <div class="tooltip">?<span class="tooltiptext">Toggle if you have an active companion</span></div>
-              </label>
-              <select id="companionActive" class="form-select">
-                <option value="false">No</option>
-                <option value="true">Yes</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="companionGain" class="form-label">Companion Gain Per Tick
-                <div class="tooltip">?<span class="tooltiptext">Amount your companion gives per tick (e.g. 1.5qd or 1e15)</span></div>
-              </label>
-              <input type="text" id="companionGain" class="form-input" placeholder="e.g. 1.5qd or 1e15">
-            </div>
-          </div>
-        </div>
-
-        <div class="profile-controls">
-          <input type="text" id="profileName" class="profile-input" placeholder="Profile name">
-          <button class="profile-btn" id="saveProfileBtn"><i class="fas fa-save"></i> Save</button>
-          <button class="profile-btn" id="loadProfileBtn"><i class="fas fa-folder-open"></i> Load</button>
-        </div>
-
-        <button class="btn" id="calculateBtn"><i class="fas fa-calculator"></i> Calculate Gains</button>
-        
-        <div class="result" id="result"></div>
-      </div>
-    </div>
-
-    
-    <div class="tab-content" id="coin-calc">
-      <div class="calculator-container">
-        <h2 class="calculator-title"><i class="fas fa-coins"></i> Coin Calculator</h2>
-        <p class="calculator-subtitle">Calculate your coin earnings based on rank and bonuses</p>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="rankSelect" class="form-label">Select Rank</label>
-            <select id="rankSelect" class="form-select">
-              <option value="0">Rookie</option>
-              <option value="1">Ninja</option>
-              <option value="2">Pirate</option>
-              <option value="3">Ghoul</option>
-              <option value="4">Hero</option>
-              <option value="5">Reaper</option>
-              <option value="6">Warrior</option>
-              <option value="7">Sin</option>
-              <option value="8">Mage</option>
-              <option value="9">Demon</option>
-              <option value="10">Emperor</option>
-              <option value="11">Elder</option>
-              <option value="12">Overlord</option>
-              <option value="13">Leader</option>
-              <option value="14">Deity</option>
-              <option value="15">Sage</option>
-              <option value="16">Mask</option>
-              <option value="17">Shinigami</option>
-              <option value="18">Hashira</option>
-              <option value="19">Destroyer</option>
-              <option value="20">Otsutsuki</option>
-              <option value="21">Pirate King</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="coinTimeInput" class="form-label">Time (minutes)
-              <div class="tooltip">?<span class="tooltiptext">Duration of coin earning in minutes</span></div>
-            </label>
-            <input type="number" id="coinTimeInput" class="form-input" placeholder="e.g. 60" required>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3 class="section-title"><i class="fas fa-gem"></i> Bonuses</h3>
-          <div class="checkbox-group">
-            <label class="checkbox-label">
-              <input type="checkbox" id="doubleCoins" class="checkbox-input">
-              2x Coins Gamepass
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" id="goldCompanion" class="checkbox-input">
-              Gold Companion (+20%)
-            </label>
-          </div>
-        </div>
-
-        <button class="btn" id="calculateCoinsBtn"><i class="fas fa-coins"></i> Calculate Earnings</button>
-        
-        <div class="result" id="coinResult"></div>
-      </div>
-    </div>
-
-    
-    <div class="tab-content" id="goal-calc">
-      <div class="calculator-container">
-        <h2 class="calculator-title"><i class="fas fa-bullseye"></i> Goal Calculator</h2>
-        <p class="calculator-subtitle">Calculate time to reach your target</p>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="goalStatType" class="form-label">Training Type
-              <div class="tooltip">?<span class="tooltiptext">Select the stat you're training (Strength, Energy, Defense, or Sword)</span></div>
-            </label>
-            <select id="goalStatType" class="form-select">
-              <option value="strength">Strength</option>
-              <option value="energy">Energy</option>
-              <option value="defense">Defense</option>
-              <option value="sword">Sword</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="goalGainPerTick" class="form-label">Your Gain Per Tick
-              <div class="tooltip">?<span class="tooltiptext">Amount you gain each training tick (e.g. 1.5sx or 1e21)</span></div>
-            </label>
-            <input type="text" id="goalGainPerTick" class="form-input" placeholder="e.g. 1.5sx or 1e21">
-          </div>
-          <div class="form-group">
-            <label for="goalCompanionGain" class="form-label">Companion Gain Per Tick
-              <div class="tooltip">?<span class="tooltiptext">Amount your companion gives per tick (e.g. 1.5qd or 1e15)</span></div>
-            </label>
-            <input type="text" id="goalCompanionGain" class="form-input" placeholder="e.g. 1.5qd or 1e15">
-          </div>
-          <div class="form-group">
-            <label for="currentStat" class="form-label">Current Stat Value
-              <div class="tooltip">?<span class="tooltiptext">Your current stat value (e.g. 1.5sx or 1e21)</span></div>
-            </label>
-            <input type="text" id="currentStat" class="form-input" placeholder="e.g. 1.5sx or 1e21">
-          </div>
-          <div class="form-group">
-            <label for="desiredStat" class="form-label">Desired Stat Value
-              <div class="tooltip">?<span class="tooltiptext">Your target stat value (e.g. 2.5sx or 2.5e21)</span></div>
-            </label>
-            <input type="text" id="desiredStat" class="form-input" placeholder="e.g. 2.5sx or 2.5e21">
-          </div>
-        </div>
-
-        <div class="profile-controls">
-          <input type="text" id="goalProfileName" class="profile-input" placeholder="Profile name">
-          <button class="profile-btn" id="saveGoalProfileBtn"><i class="fas fa-save"></i> Save</button>
-          <button class="profile-btn" id="loadGoalProfileBtn"><i class="fas fa-folder-open"></i> Load</button>
-        </div>
-
-        <button class="btn" id="calculateGoalBtn"><i class="fas fa-bullseye"></i> Calculate Time Needed</button>
-        
-        <div class="result" id="goalResult"></div>
-      </div>
-    </div>
-
-    
-    <div class="tab-content" id="trade-calc">
-      <div class="calculator-container">
-        <h2 class="calculator-title"><i class="fas fa-exchange-alt"></i> Companion Trading Calculator</h2>
-        <p class="calculator-subtitle">Calculate the value of your companion trades</p>
-        <b> <p class="calculator-subtitle">Special thanks to Harry, BruceWaynie, War, Svfe09 and Fantom for their help with values!  </p></b>
-        <b>  <p class="calculator-subtitle">Trading is at your own risk! Do not DM devs or Testers help for scams</p></b>
-
-        <div class="trade-container">
-          
-          <div class="trade-panel">
-            <h2 class="panel-title">Your Offer</h2>
-            <div class="add-companion-btn" id="add-your-companion">
-              <i class="fas fa-plus-circle"></i>
-              <span>Add Companion</span>
-            </div>
-            <div class="selected-companions" id="your-offer"></div>
-          </div>
-
-         
-          <div class="trade-panel">
-            <h2 class="panel-title">Their Offer</h2>
-            <div class="add-companion-btn" id="add-their-companion">
-              <i class="fas fa-plus-circle"></i>
-              <span>Add Companion</span>
-            </div>
-            <div class="selected-companions" id="their-offer"></div>
-          </div>
-        </div>
-
-        <button class="btn" id="calculate-trade"><i class="fas fa-calculator"></i> Calculate Trade</button>
-        
-        <div class="result" id="trade-result">
-          <div class="result-item">
-            <span>Your Offer Value:</span>
-            <span class="result-value" id="your-value">0</span>
-          </div>
-          <div class="result-item">
-            <span>Their Offer Value:</span>
-            <span class="result-value" id="their-value">0</span>
-          </div>
-          <div class="result-item" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
-            <span style="font-weight: 700;">Trade Result:</span>
-            <span class="result-value" style="font-weight: 700;" id="trade-result-text">Fair Trade</span>
-          </div>
-          <div class="result-item">
-            <span>Difference:</span>
-            <span class="result-value" id="difference-value">0</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    
-    <div class="tab-content" id="values-tab">
-      <div class="calculator-container">
-        <h2 class="calculator-title"><i class="fas fa-list-alt"></i> Companion & Aura Values</h2>
-        <p class="calculator-subtitle">Reference values for trading companions and auras</p>
-        <p class="calculator-subtitle" style="color: var(--gold); margin-top: 0.5rem;">
-          <i class="fas fa-exclamation-triangle"></i> Values are approximate and may change over time
-        </p>
-
-        <div class="search-box">
-          <input type="text" id="values-search" class="search-input" placeholder="Search companions and auras...">
-        </div>
-
-        <div class="values-container">
-          
-          <div class="values-section">
-            <h3 class="values-section-title">
-              <i class="fas fa-robot"></i> Companions
-            </h3>
-            <div class="values-grid" id="companions-values">
-             
-            </div>
-          </div>
-
-          
-          <div class="values-section">
-            <h3 class="values-section-title">
-              <i class="fas fa-certificate"></i> Auras
-            </h3>
-            <div class="values-grid" id="auras-values">
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="modal" id="companion-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title">Select Companion</h2>
-        <button class="close-modal" id="close-modal">&times;</button>
-      </div>
-      <div class="companion-grid" id="companion-grid">
-        
-      </div>
-    </div>
-  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      
+      // Create particles with the new color scheme
       function createParticles() {
         const particlesContainer = document.getElementById('particles');
         const particleCount = Math.floor(window.innerWidth / 15);
@@ -1471,7 +1417,62 @@
       }
       
       createParticles();
-
+      
+      // Navigation functionality
+      const hubSection = document.getElementById('hub-section');
+      const mainHeader = document.getElementById('main-header');
+      const tabButtons = document.querySelectorAll('.nav-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+      const hubCards = document.querySelectorAll('.hub-card');
+      
+      // Function to show a specific tab
+      function showTab(tabId) {
+        // Hide hub section and show main header when navigating to calculators
+        if (tabId !== 'hub-tab') {
+          hubSection.style.display = 'none';
+          mainHeader.style.display = 'flex';
+        } else {
+          hubSection.style.display = 'block';
+          mainHeader.style.display = 'none';
+        }
+        
+        // Update active tab button
+        tabButtons.forEach(button => {
+          if (button.getAttribute('data-tab') === tabId) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        });
+        
+        // Show the selected tab content
+        tabContents.forEach(content => {
+          if (content.id === tabId) {
+            content.classList.add('active');
+          } else {
+            content.classList.remove('active');
+          }
+        });
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+      }
+      
+      // Add event listeners to hub cards
+      hubCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const tabId = card.getAttribute('data-tab');
+          showTab(tabId);
+        });
+      });
+      
+      // Add event listeners to nav buttons
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const tabId = button.getAttribute('data-tab');
+          showTab(tabId);
+        });
+      });
       
       const tabButtons = document.querySelectorAll('.nav-btn');
       const tabContents = document.querySelectorAll('.tab-content');
@@ -2462,95 +2463,6 @@
         });
       });
     });
-
-      function createParticles() {
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = Math.floor(window.innerWidth / 15);
-        
-        for (let i = 0; i < particleCount; i++) {
-          const particle = document.createElement('div');
-          particle.classList.add('particle');
-          
-          const size = Math.random() * 4 + 1;
-          const posX = Math.random() * window.innerWidth;
-          const posY = Math.random() * window.innerHeight;
-          const duration = Math.random() * 30 + 20;
-          const delay = Math.random() * 5;
-          
-          particle.style.width = `${size}px`;
-          particle.style.height = `${size}px`;
-          particle.style.left = `${posX}px`;
-          particle.style.top = `${posY}px`;
-          particle.style.animationDuration = `${duration}s`;
-          particle.style.animationDelay = `${delay}s`;
-          
-          const colors = ['var(--primary)', 'var(--secondary)', 'var(--accent)'];
-          particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-          
-          particlesContainer.appendChild(particle);
-        }
-      }
-      
-      createParticles();
-      
-      // Navigation functionality
-      const hubSection = document.getElementById('hub-section');
-      const mainHeader = document.getElementById('main-header');
-      const tabButtons = document.querySelectorAll('.nav-btn');
-      const tabContents = document.querySelectorAll('.tab-content');
-      const hubCards = document.querySelectorAll('.hub-card');
-      
-      // Function to show a specific tab
-      function showTab(tabId) {
-        // Hide hub section and show main header when navigating to calculators
-        if (tabId !== 'hub-tab') {
-          hubSection.style.display = 'none';
-          mainHeader.style.display = 'flex';
-        } else {
-          hubSection.style.display = 'block';
-          mainHeader.style.display = 'none';
-        }
-        
-        // Update active tab button
-        tabButtons.forEach(button => {
-          if (button.getAttribute('data-tab') === tabId) {
-            button.classList.add('active');
-          } else {
-            button.classList.remove('active');
-          }
-        });
-        
-        // Show the selected tab content
-        tabContents.forEach(content => {
-          if (content.id === tabId) {
-            content.classList.add('active');
-          } else {
-            content.classList.remove('active');
-          }
-        });
-        
-        // Scroll to top
-        window.scrollTo(0, 0);
-      }
-      
-      // Add event listeners to hub cards
-      hubCards.forEach(card => {
-        card.addEventListener('click', () => {
-          const tabId = card.getAttribute('data-tab');
-          showTab(tabId);
-        });
-      });
-      
-      // Add event listeners to nav buttons
-      tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          const tabId = button.getAttribute('data-tab');
-          showTab(tabId);
-        });
-      });
-      
-      // Your existing calculator JavaScript would go here
-      // For brevity, I've omitted the full calculator functionality
     });
   </script>
 </body>
